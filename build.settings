@@ -9,8 +9,8 @@ settings =
 	{
 		-- Supported values for orientation:
 		-- portrait, portraitUpsideDown, landscapeLeft, landscapeRight
-		default = "landscapeRight",
-		supported = { "landscapeRight", },
+		default = "landscapeLeft",
+		supported = { "landscapeLeft", "landscapeRight" },
 	},
 
 	--
@@ -18,10 +18,20 @@ settings =
 	--
 	android =
 	{
+		versionCode = "10",
 		usesPermissions =
 		{
-			"android.permission.INTERNET",
+		 --"android.permission.INTERNET",  --accesso ad internet
+         --"android.permission.WRITE_EXTERNAL_STORAGE", --permette il salvataggio dei media e il supporto camera
+         --"android.permission.ACCESS_FINE_LOCATION",  --permette l'accesso al gps
+         --"android.permission.ACCESS_COARSE_LOCATION",  --permette di ricevere la posizione dal wifi/cellulare
 		},
+		usesFeatures =
+        {
+         { name="android.hardware.camera", required=false },
+         { name="android.hardware.location", required=false },
+         { name="android.hardware.location.gps", required=false }
+        },
 	},
 
 	--
@@ -32,8 +42,11 @@ settings =
 		xcassets = "Images.xcassets",
 		plist =
 		{
-			UIStatusBarHidden = false,
-			UILaunchStoryboardName = "LaunchScreen",
+		  --CFBundleIconFiles = {},  -- Required!
+          --UILaunchStoryboardName = "LaunchScreen",  -- Required!
+          --UIStatusBarHidden = true,
+          --CFBundleDisplayName = "TimeLine Fights",
+          --CFBundleName = "TimeLine Fights",
 		},
 	},
 
