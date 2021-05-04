@@ -1,7 +1,7 @@
 require("skill")
 local widget = require "widget"
 
-function NewSkillsBar(player)
+function NewSkillsBar()
     local self = display.newGroup()
     local skillsRect = display.newRoundedRect(display.contentCenterX,290,display.contentWidth * 1.1,50, 10)
     self:insert(skillsRect)
@@ -9,7 +9,7 @@ function NewSkillsBar(player)
     skillsRect.alpha = 0.3
     skillsRect.y = 290
 
-    local playerOnTurn = player
+    local playerOnTurn --= player
     local passive = {}
     local active = {}
 

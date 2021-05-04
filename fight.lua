@@ -1,3 +1,5 @@
+---@diagnostic disable: undefined-global
+
 
 require("spots")
 require ("character")
@@ -18,10 +20,11 @@ local allyTeamGroup
 local skillsBarGroup
 local spellGroup
 local uiGroup
+local listenerTable = {} --necessaria?
 local turnTable = {}
-local spotsTable = {}
-local charsTable = {}
-local playerOnTurn
+local spotsTable = {} --?
+local charsTable = {} --?
+local playerOnTurn = {}
 local battlePhase = "starting..."
 
 local allySpotsCoord = {
@@ -153,7 +156,6 @@ function GetCharOn(x,y) --DA SPOSTARE IN character.LUA ??
     return nil
 end
 
-
 local function dragListener( event )
     local charTouched = event.target
     local initialSpot = charTouched.spot
@@ -203,6 +205,7 @@ local function dragListener( event )
           end
   
         allySpotsGroup:resetSpotsColor()
+        --turnTable:updateTurnDisplay()
         display.getCurrentStage():setFocus( nil )
     end
     return true
@@ -279,9 +282,10 @@ local function getPlayerOnTurn()
 end
 
 local function gameLoop()
+    --?? da fare in una funzione 
+    turnTable.roundCount = 1
 
     turnTable:makeNewTurn()
-    turnTable:displayTurnPrevision()
     playerOnTurn = turnTable:getPlayerOnTurn()
     skillsBarGroup:setPlayerOnTurn(playerOnTurn)
     skillsBarGroup:setSkills(playerOnTurn)
@@ -326,10 +330,11 @@ function scene:create( event )
     --creo i chars di ogni squadra e li metto nei rispettivi group object
     enemyTeamGroup = makeEnemyTeam(lvlChars)
     allyTeamGroup = makeAllyTeam(CharactersCollection)
-    
+    --inizio a creare i turni
     turnTable = NewTurnTable(uiGroup)
     charsTable = initCharsTable(enemyTeamGroup,allyTeamGroup)
     turnTable:initTurnTable(charsTable)
+    turnTable:displayTurnPrevision()
 
     
     
@@ -358,8 +363,9 @@ function scene:show( event )
         --fightLoop()
         AddCharListener(enemyTeamGroup)
         addDragListener(allyTeamGroup) --NON POSSO SPOSTARLO PERCHE MI SERVE IL TEAMGROUP 
+        
         local startFightButton = widget.newButton(
-            {
+            {   -- pulsante di prova, provvisorio
                 label = "Start Fight!",
                 onEvent = handleStartFightButtonEvent,
                 emboss = false,

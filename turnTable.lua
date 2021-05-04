@@ -1,3 +1,5 @@
+---@diagnostic disable: undefined-global
+
 
 require ("character")
 
@@ -32,6 +34,7 @@ function NewTurnTable(uiGroup)
 
     function self:setToAttacked(char)
         table.insert(self.attacked,char)
+        char:colorTurnDisplay({0.6,0.6,0.6})
     end
 
     function self:fillQueueFromAttacked()
@@ -44,7 +47,7 @@ function NewTurnTable(uiGroup)
 
     function self:sortQueueByVel() --aggiorna myTurn ?
         table.sort(self.queued,sortByVel)
-        print("turni restanti :\n")
+        print("[turnTable:sortByVel]ordine dei giocatori :\n")
         for i = 1, #self.queued do
             self.queued[i].myTurn = i + self.turnCount
             print("[".. (i+self.turnCount) .. "] : ".. self.queued[i].infoChar.name)
@@ -56,14 +59,24 @@ function NewTurnTable(uiGroup)
         self.turnText.text = "Turn: "..self.turnString()
     end
 
+    function self:increaseRound()
+        self.roundCount = self.roundCount + 1
+        self:updateRoundTurnText()
+    end
+    function self:increaseTurn()
+        self.turnCount = self.turnCount + 1
+        self:updateRoundTurnText()
+    end
+
+
     function self:searchByTurn(turn)
         for i = 1 , #self.queued do
             if self.queued[i].myTurn == turn then
-                print("giocatore trovato: "..self.queued[i].infoChar.name)
+                print("[turnTable:searchByTurn]giocatore trovato: "..self.queued[i].infoChar.name)
                 return self.queued[i]
             end
         end
-        print("giocatore non trovato")
+        print("[turnTable:searchByTurn]giocatore non trovato")
         return nil
     end
 
@@ -73,38 +86,49 @@ function NewTurnTable(uiGroup)
 
     function self:setPlayerOnTurn(player)
         self.playerOnTurn = player
-        print("playerOnTurn setted: ".. self.playerOnTurn.infoChar.name )
+        print("[turnTable:setPlayerOnTurn]playerOnTurn setted: ".. self.playerOnTurn.infoChar.name )
     end
 
     function self:displayTurnPrevision()
         for i = 1 , #self.queued do
-            self.queued[i]:showTurnDisplay(self.turnCount)
+            self.queued[i]:makeTurnDisplay(self.turnCount)
         end
     end
 
     function self:nextTurn()
         --prendo il primo in coda e lo setto player on turn
         local nextPlayer = self:getFirstQueued() --questo lo rimuove dalla coda
+        print("[turnTable:nextTurn]chiamo setPlayerOnTurn")
         self:setPlayerOnTurn(nextPlayer)
-        print("player on turn setted on "..nextPlayer.infoChar.name)
         --imposto la sua skill bar
 
         --TODO
     end
-    
+
+    --serve?
+    function self:checkNext()
+        return self.queued[1] ~= nil
+    end
+
     function self:makeNewTurn()
+        --aggiorno round e turn text
+        self:increaseTurn()
         --aggiorna stat turn based,dot,hot,regen,passive ecc?
         --setto il playerOnTurn
+
         local nextPlayer = self:getFirstQueued()
         if nextPlayer == nil then
-            print("errore makeNewTurn , creo nuovo round.")
+            print("[turnTable:makeNewTurn]errore makeNewTurn , creo nuovo round.")
             self:makeNewRound()
         else
+            print("[turnTable:makeNewTurn] chiamo setPlayerOnTurn")
             self:setPlayerOnTurn(nextPlayer)
-            print("setto nuovo playerOnTurn: ".. nextPlayer.infoChar.name)
+            print("[turnTable:makeNewTurn] setto il colore del turn display verde")
+            self.playerOnTurn:colorTurnDisplay({0,0.8,0})
         end
     end
-    
+
+    --TODO da completare
     function self:makeNewRound()
         self:newQueue(self.attacked)
     end

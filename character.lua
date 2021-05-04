@@ -126,9 +126,9 @@ function NewFightCharacter ( properties, isEnemy )
         self.spot:setFillColor(color)
     end
     
-    function self:showTurnDisplay()
+    function self:makeTurnDisplay()
         
-        print("printo myTurn ".. self.infoChar.name.. " = " .. self.myTurn)
+        print("[char:makeTurnDisplay]creo turn display ".. self.infoChar.name.. " = " .. self.myTurn)
         self.turnView = display.newCircle(self.x + 40,self.y + 45, 12)
         self.turnView.alpha = 0.5
         self.turnView:setFillColor(0.6,0.6,0.6)
