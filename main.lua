@@ -87,7 +87,6 @@ local characters =
           manaCost = 70,
           desc = "attacco a target singolo, puo attaccare un Characters solo sulla la seconda fila",
           target = {1,"backLine"},
-          onCast = function(skill,spot,playerTarget) dealDmgPlayer(playerTarget,skill) end        
         },
         }
       }
@@ -418,4 +417,4 @@ composer.setVariable("lvlCharsTable", lvlCharsTable)
 
 
 -- Start at tab1
-composer.gotoScene( "tutorial",{effect = "fade", time = 200} )
+composer.gotoScene( "fight",{effect = "fade", time = 200} )
