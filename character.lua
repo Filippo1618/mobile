@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-global
 require("spots")
 local widget = require "widget"
 
@@ -124,10 +125,6 @@ function NewFightCharacter ( properties, isEnemy )
     function self:changeSpotColor(color)
         self.spot:setFillColor(color)
     end
-
-    function self:turnOnTurnDisplay()
-        
-    end
     
     function self:showTurnDisplay()
         
@@ -146,15 +143,12 @@ function NewFightCharacter ( properties, isEnemy )
             self.turnText.y = self.y + 45
         end
     end
-    function self:updateTurnDisplay(turn)
-        
-    end
     
     function self:colorTurnDisplay(color)
         self.turnView:setFillColor(unpack(color))
     end
     
-    function self:moveBars(spot)
+    function self:moveBars(spot) -- da settare in base a char non spot
         self.hpBar.x = spot.x
         self.hpBar.y = spot.y + 10
         self.manaBar.x = spot.x
@@ -220,13 +214,8 @@ function NewFightCharacter ( properties, isEnemy )
         self.manaBar.y = self.spot.y + 20
         self.manaBar.alpha = 0.7
     end
+
     function self:castSkill(skill,skillTargets)
-    end
-
-    function self:setPassive(passiveSkill)
-    end
-
-    function self:setTimer()
     end
 
     function self:updateStat()
