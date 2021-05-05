@@ -4,7 +4,6 @@
 --
 -----------------------------------------------------------------------------------------
 
--- Your code here
 --require ("mobdebug").start()
 local composer = require "composer"
 
@@ -145,7 +144,7 @@ local characters =
           tipo = "dmg",
           team = "vs",
           dmg = 50,
-          desc = "attacco a target singolo; puo attaccare un Characterso solo sulla la prima fila",
+          desc = "attacco a target singolo; puo attaccare un Character solo sulla la prima fila",
           target = {"frontLine"},
           manaCost = 10,
           --calcolaDanni = calcolaDannoStandard(playerCaster,skill,playerTarget)
@@ -158,7 +157,7 @@ local characters =
           team = "vs",
           dmg = 50,
           manaCost = 70,
-          desc = "attacco a target singolo; puo attaccare un Characterso solo sulla la seconda fila",
+          desc = "attacco a target singolo; puo attaccare un Character solo sulla la seconda fila",
           target = {"backLine"},
           onCast = function(skill,spot,playerTarget) dealDmgPlayer(playerTarget,skill) end        
         },
@@ -218,7 +217,7 @@ local characters =
               tipo = "dmg",
               team = "vs",
               dmg = 50,
-              desc = "attacco a target singolo; puo attaccare un Characterso solo sulla la prima fila",
+              desc = "attacco a target singolo; puo attaccare un Character solo sulla la prima fila",
               target = {"frontLine"},
               manaCost = 10,
               --calcolaDanni = calcolaDannoStandard(playerCaster,skill,playerTarget)
@@ -231,7 +230,7 @@ local characters =
               team = "vs",
               dmg = 50,
               manaCost = 70,
-              desc = "attacco a target singolo; puo attaccare un Characterso solo sulla la seconda fila",
+              desc = "attacco a target singolo; puo attaccare un Character solo sulla la seconda fila",
               target = {"backLine"},
               onCast = function(skill,spot,playerTarget) dealDmgPlayer(playerTarget,skill) end        
             },
@@ -289,7 +288,7 @@ local characters =
               tipo = "dmg",
               team = "vs",
               dmg = 50,
-              desc = "attacco a target singolo; puo attaccare un Characterso solo sulla la prima fila",
+              desc = "attacco a target singolo; puo attaccare un Character solo sulla la prima fila",
               target = {"frontLine"},
               manaCost = 10,
               --calcolaDanni = calcolaDannoStandard(playerCaster,skill,playerTarget)
@@ -302,7 +301,7 @@ local characters =
               team = "vs",
               dmg = 50,
               manaCost = 70,
-              desc = "attacco a target singolo; puo attaccare un Characterso solo sulla la seconda fila",
+              desc = "attacco a target singolo; puo attaccare un Character solo sulla la seconda fila",
               target = {"backLine"},
               onCast = function(skill,spot,playerTarget) dealDmgPlayer(playerTarget,skill) end        
             },
@@ -360,7 +359,7 @@ local characters =
               tipo = "dmg",
               team = "vs",
               dmg = 50,
-              desc = "attacco a target singolo; puo attaccare un Characterso solo sulla la prima fila",
+              desc = "attacco a target singolo; puo attaccare un Character solo sulla la prima fila",
               target = {"frontLine"},
               manaCost = 10,
               --calcolaDanni = calcolaDannoStandard(playerCaster,skill,playerTarget)
@@ -373,7 +372,7 @@ local characters =
               team = "vs",
               dmg = 50,
               manaCost = 70,
-              desc = "attacco a target singolo; puo attaccare un Characterso solo sulla la seconda fila",
+              desc = "attacco a target singolo; puo attaccare un Character solo sulla la seconda fila",
               target = {"backLine"},
               onCast = function(skill,spot,playerTarget) dealDmgPlayer(playerTarget,skill) end        
             },
@@ -401,7 +400,7 @@ local function deepcopy(orig)
   return copy
 end
 
---copia una tabella char in CharactersCollection 
+--copia una tabella char in CharactersCollection
 function AddCharToCollection (char)
   local newChar = deepcopy(char)
   table.insert(CharactersCollection, newChar)
@@ -416,5 +415,5 @@ lvlCharsTable["medioevo"] = {characters[3],characters[3],characters[4]}
 composer.setVariable("lvlCharsTable", lvlCharsTable)
 
 
--- Start at tab1
-composer.gotoScene( "fight",{effect = "fade", time = 200} )
+-- Start at menu
+composer.gotoScene( "menu", {effect = "fade", time = 200} )
