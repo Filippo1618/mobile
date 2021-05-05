@@ -48,56 +48,56 @@ function scene:create( event )
     uiGroup = display.newGroup()
     sceneGroup:insert(uiGroup)
 
-    local background = display.newImageRect(backGroup,"img/sfondo480-320.png",480*1.2,320*1.2)
+    local background = display.newImageRect(backGroup,"img/spacecartoon.jpg",480*1.2,320*1.2)
     background.x = display.contentCenterX
     background.y = display.contentCenterY
 
-    local tlfText = display.newImage(backGroup, "img/TLFtext.png")
+    local tlfText = display.newImage(backGroup, "img/tlf-1.png")
     tlfText.x = display.contentCenterX
-    tlfText.y = display.contentCenterY-60
+    tlfText.y = display.contentCenterY-95
 
     local buttonPlay = widget.newButton(
        {
             fontSize = 40,
             emboss = true,
             id = "buttonPlay",
-            label = "GIOCA",
-            labelColor = { default={ 1, 1, 1 }, over={ 0, 0, 0, 0.5 } },
+            defaultFile = "img/start.png",
+            overFile = "img/startover.png",
             onRelease = giocaRelease
       }
     )
     buttonPlay.x = display.contentCenterX
-    buttonPlay.y = display.contentCenterY-30
+    buttonPlay.y = display.contentCenterY+10
 
-    uiGroup:insert(buttonGioca)
+    uiGroup:insert(buttonPlay)
 
     local buttonTutorial = widget.newButton(
         {
-            fontSize = 30,
             emboss = true,
             id = "buttonTutorial",
-            label = "Tutorial",
-            labelColor = { default={ 1, 1, 1 }, over={ 0, 0, 0, 0.5 } },
+            defaultFile = "img/tutorial.png",
+            overFile = "img/tutorialover.png",
             onEvent = handleButtonEvent
         }
     )
-    buttonTutorial.x = button1.x
-    buttonTutorial.y = button1.y + button1.height + 10
+    buttonTutorial.x = display.contentCenterX-180
+    buttonTutorial.y = display.contentCenterY+120
 
     uiGroup:insert(buttonTutorial)
 
     local buttonOption = widget.newButton(
         {
-            fontSize = 30,
             emboss = true,
+            width = 50,
+            height = 50,
             id = "buttonOption",
-            label = "Impostazioni",
-            labelColor = { default={ 1, 1, 1 }, over={ 0, 0, 0, 0.5 } },
+            defaultFile = "img/opt.png",
+            overFile = "img/optover.png",
             onEvent = handleButtonEvent
         }
     )
-    buttonOption.x = button2.x
-    buttonOption.y = button2.y + button2.height
+    buttonOption.x = display.contentCenterX+230
+    buttonOption.y = display.contentCenterY+120
 
     uiGroup:insert(buttonOption)
 
