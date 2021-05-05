@@ -18,11 +18,17 @@ local mainGroup
 local backGroup
 local uiGroup
 
--- Function to handle button events
 local function giocaRelease( event )
     if ( "ended" == event.phase ) then
         print( "si gioca" )
         composer.gotoScene("timeLineScrollView",{effect ="fade", time= 200})
+    end
+end
+
+local function optionRelease( event )
+    if ( "ended" == event.phase ) then
+        print( "opzioni" )
+        composer.showOverlay( "option", { isModal = true, effect = "fade", time = 200 } )
     end
 end
 
@@ -31,6 +37,11 @@ local function handleButtonEvent( event )
     if ( "ended" == event.phase ) then
         print( "Button was pressed and released" )
     end
+end
+
+-- Custom function for resuming the game (from pause state)
+function scene:resumeGame()
+    -- Code to resume game
 end
 
 -- create()
@@ -93,7 +104,7 @@ function scene:create( event )
             id = "buttonOption",
             defaultFile = "img/opt.png",
             overFile = "img/optover.png",
-            onEvent = handleButtonEvent
+            onRelease = optionRelease
         }
     )
     buttonOption.x = display.contentCenterX+230

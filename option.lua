@@ -4,42 +4,46 @@
 --
 -----------------------------------------------------------------------------------------
 
--- Your code here
 local composer = require( "composer" )
-
 local widget = require("widget")
-
 local scene = composer.newScene()
 
+local group
 
--- -----------------------------------------------------------------------------------
--- Code outside of the scene event functions below will only be executed ONCE unless
--- the scene is removed entirely (not recycled) via "composer.removeScene()"
--- -----------------------------------------------------------------------------------
+local function turnBackRelease( event )
+    if ( "ended" == event.phase ) then
+        print( "menu, di nuovo" )
+        composer.hideOverlay( {recycleOnly = true, effect = "fade", time = 200} )
+    end
+end
 
 
--- -----------------------------------------------------------------------------------
--- Scene event functions
--- -----------------------------------------------------------------------------------
---
 -- create()
 function scene:create( event )
 
     local sceneGroup = self.view
-    -- Code here runs when the scene is first created but has not yet appeared on screen
-    -- Create a container
-    local container = display.newContainer( 128, 128 )
 
-    -- Create an image
-    local bkgd = display.newImage( "img/sfondo480-320.png" )
-    -- Insert the image into the container
-    container:insert( bkgd, true )
-    -- Center the container in the display area
-    container:translate( display.contentWidth*0.5, display.contentHeight*0.5 )
+    group = display.newGroup()
+    sceneGroup:insert(group)
 
--- Transition (rotate) the container
-  transition.to( container, { rotation=360, transition=easing.inOutExpo} )
-  sceneGroup:insert(container)
+    local sfondo = display.newRect (display.contentCenterX,display.contentCenterY,display.contentWidth*1.2,display.contentHeight)
+    sfondo: setFillColor(0,0,0,0.5)
+    group: insert(sfondo)
+
+    -- By some method such as a "resume" button, hide the overlay
+    local resume = widget.newButton(
+        {
+            fontSize = 40,
+            emboss = true,
+            id = "buttonPlay",
+            label = "indietro",
+            onRelease = turnBackRelease
+        }
+    )
+    resume.x = display.contentCenterX
+    resume.y = display.contentCenterY
+    group:insert(resume)
+
 end
 
 
@@ -61,16 +65,13 @@ end
 
 -- hide()
 function scene:hide( event )
-
     local sceneGroup = self.view
     local phase = event.phase
-
+    local parent = event.parent  -- Reference to the parent scene object
+ 
     if ( phase == "will" ) then
-        -- Code here runs when the scene is on screen (but is about to go off screen)
-
-    elseif ( phase == "did" ) then
-        -- Code here runs immediately after the scene goes entirely off screen
-
+        -- Call the "resumeGame()" function in the parent scene
+        parent:resumeGame()
     end
 end
 
@@ -80,7 +81,7 @@ function scene:destroy( event )
 
     local sceneGroup = self.view
     -- Code here runs prior to the removal of scene's view
-
+    
 end
 
 
