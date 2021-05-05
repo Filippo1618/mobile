@@ -28,7 +28,7 @@ end
 local function optionRelease( event )
     if ( "ended" == event.phase ) then
         print( "opzioni" )
-        composer.showOverlay( "option", { isModal = true, effect = "fade", time = 200 } )
+        composer.showOverlay( "option", { isModal = true, effect = "slideRight", time = 200 } )
     end
 end
 
@@ -67,50 +67,46 @@ function scene:create( event )
     tlfText.x = display.contentCenterX
     tlfText.y = display.contentCenterY-95
 
-    local buttonPlay = widget.newButton(
+    local playButton = widget.newButton(
        {
-            fontSize = 40,
-            emboss = true,
             id = "buttonPlay",
             defaultFile = "img/start.png",
             overFile = "img/startover.png",
             onRelease = giocaRelease
       }
     )
-    buttonPlay.x = display.contentCenterX
-    buttonPlay.y = display.contentCenterY+10
+    playButton.x = display.contentCenterX
+    playButton.y = display.contentCenterY+10
 
-    uiGroup:insert(buttonPlay)
+    uiGroup:insert(playButton)
 
-    local buttonTutorial = widget.newButton(
+    local tutorialButton = widget.newButton(
         {
-            emboss = true,
-            id = "buttonTutorial",
+            id = "tutorialButton",
             defaultFile = "img/tutorial.png",
             overFile = "img/tutorialover.png",
             onEvent = handleButtonEvent
         }
     )
-    buttonTutorial.x = display.contentCenterX-180
-    buttonTutorial.y = display.contentCenterY+120
+    tutorialButton.x = display.contentCenterX-180
+    tutorialButton.y = display.contentCenterY+120
 
-    uiGroup:insert(buttonTutorial)
+    uiGroup:insert(tutorialButton)
 
-    local buttonOption = widget.newButton(
+    local optionButton = widget.newButton(
         {
-            emboss = true,
-            width = 50,
-            height = 50,
-            id = "buttonOption",
+            id = "optionButton",
             defaultFile = "img/opt.png",
             overFile = "img/optover.png",
+            width = 50,
+            height = 50,
             onRelease = optionRelease
         }
     )
-    buttonOption.x = display.contentCenterX+230
-    buttonOption.y = display.contentCenterY+120
+    optionButton.x = display.contentCenterX+230
+    optionButton.y = display.contentCenterY+120
 
-    uiGroup:insert(buttonOption)
+    uiGroup:insert(optionButton)
 
     local character = display.newImageRect(mainGroup,"img/IllustratorSX.png",45,70)
     character.x = display.contentWidth*4/5

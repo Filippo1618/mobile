@@ -13,7 +13,7 @@ local group
 local function turnBackRelease( event )
     if ( "ended" == event.phase ) then
         print( "menu, di nuovo" )
-        composer.hideOverlay( {recycleOnly = true, effect = "fade", time = 200} )
+        composer.hideOverlay( {recycleOnly = true, effect = "slideRight", time = 300} )
     end
 end
 
@@ -26,23 +26,26 @@ function scene:create( event )
     group = display.newGroup()
     sceneGroup:insert(group)
 
-    local sfondo = display.newRect (display.contentCenterX,display.contentCenterY,display.contentWidth*1.2,display.contentHeight)
+    local sfondo = display.newRect (display.contentCenterX, display.contentCenterY, display.contentWidth*1.2, display.contentHeight)
     sfondo: setFillColor(0,0,0,0.5)
     group: insert(sfondo)
 
-    -- By some method such as a "resume" button, hide the overlay
-    local resume = widget.newButton(
+    local background = display.newImage("img/optmenu.png", display.contentCenterX, display.contentCenterY)
+    background.width = display.contentWidth
+    group: insert(background)
+
+    local resumeButton = widget.newButton(
         {
-            fontSize = 40,
-            emboss = true,
-            id = "buttonPlay",
+            fontSize = 30,
+            id = "resumeButton",
             label = "indietro",
+            labelColor = { default={ 255,140,0 }, over={ 75,0,130 } },
             onRelease = turnBackRelease
         }
     )
-    resume.x = display.contentCenterX
-    resume.y = display.contentCenterY
-    group:insert(resume)
+    resumeButton.x = display.contentCenterX-145
+    resumeButton.y = display.contentCenterY+70
+    group:insert(resumeButton)
 
 end
 
