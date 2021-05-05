@@ -18,10 +18,10 @@ local mainGroup
 local backGroup
 local uiGroup
 
-local function giocaRelease( event )
+local function startRelease( event )
     if ( "ended" == event.phase ) then
-        print( "si gioca" )
-        composer.gotoScene("timeLineScrollView",{effect ="fade", time= 200})
+        print( "scegli il livello" )
+        composer.gotoScene("timelineScrollView", {effect ="fade", time= 200})
     end
 end
 
@@ -69,10 +69,10 @@ function scene:create( event )
 
     local playButton = widget.newButton(
        {
-            id = "buttonPlay",
+            id = "playButton",
             defaultFile = "img/start.png",
             overFile = "img/startover.png",
-            onRelease = giocaRelease
+            onRelease = startRelease
       }
     )
     playButton.x = display.contentCenterX

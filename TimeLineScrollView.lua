@@ -1,14 +1,12 @@
 -----------------------------------------------------------------------------------------
 --
--- timeLineScrollView.lua
+-- timelineScrollView.lua
 --
 -----------------------------------------------------------------------------------------
 
--- Your code here
 local widget = require( "widget" )
 local composer = require( "composer" )
 local scene = composer.newScene()
-
 
 local lunghezzaLivelli = 161*1.3
 local altezzaLivelli = 100*1.3
@@ -144,45 +142,45 @@ local buttonsTable ={}
 -- Create scene
 
 function scene:create( event )
-	local sceneGroup = self.view
-	local background  = display.newImageRect("img/sfondoMenu1.png",1920 , 1080 )
-  sceneGroup:insert(background)
-  
-    -- Set up display groups
-  backGroup = display.newGroup()  -- Display group for the background image
-  sceneGroup:insert( backGroup )  -- Insert into the scene's view group
- 
-  mainGroup = display.newGroup()  -- Display group for the ship, asteroids, lasers, etc.
-  sceneGroup:insert( mainGroup )  -- Insert into the scene's view group
- 
-  uiGroup = display.newGroup()    -- Display group for UI objects like the score
-  sceneGroup:insert( uiGroup )    -- Insert into the scene's view group
 
---set up the team group  
+	local sceneGroup = self.view
+
+  backGroup = display.newGroup()
+  sceneGroup:insert(backGroup)
+
+  mainGroup = display.newGroup()
+  sceneGroup:insert(mainGroup)
+
+  uiGroup = display.newGroup()
+  sceneGroup:insert(uiGroup)
+
+	local background  = display.newImageRect("img/spacecartoon.jpg", 480*1.2,320*1.2)
+  background.x = display.contentCenterX
+  background.y = display.contentCenterY
+  backGroup:insert(background)
+
   vsTeamGroup = display.newGroup()
   vsTeamGroup.x = 100
   vsTeamGroup.y = 240
-  
-  sceneGroup:insert( vsTeamGroup )    -- Insert into the scene's view group
+  sceneGroup:insert( vsTeamGroup )
 
 
 	-- Create a scrollView
-	local scrollView = widget.newScrollView {
-		width = display.contentWidth*1.2,
-		height = display.contentHeight,
-    left = -40,
-		backgroundColor = backgroundColor,
-		--isBounceEnabled = false,
-		horizontalScrollDisabled = false,
-		verticalScrollDisabled = true,
-		hideBackground = true,
-		rightPadding = 100,
-		listener = scrollListener
-	}
+	local scrollView = widget.newScrollView (
+    {
+      width = display.contentWidth*1.2,
+      height = display.contentHeight,
+      left = -40,
+      backgroundColor = backgroundColor,
+      --isBounceEnabled = false,
+      horizontalScrollDisabled = false,
+      verticalScrollDisabled = true,
+      hideBackground = true,
+      rightPadding = 100,
+      listener = scrollListener
+	  }
+  )
 	backGroup:insert( scrollView )
- -- sceneGroup:insert(vsTeamGroup)
-
-
 
   --pulsantiLivelli
   local buttonMedioevo = widget.newButton(
@@ -270,102 +268,93 @@ function scene:create( event )
 		scrollView:insert(buttonsTable[i])
 	end
 
---Pulsante Gioca
-local playButton = widget.newButton(
+  --Pulsante Gioca
+  local playButton = widget.newButton(
+      {
+          id = "playButton",
+          label = "Play",
+          numero = 3,
+          emboss = false,
+          labelColor = { default={ 1, 1, 1 }, over={ 1, 0, 0, 0.5 } },
+          -- Properties for a rounded rectangle button
+          shape = "roundedRect",
+          width = 70,
+          height = 70,
+          cornerRadius = 20,
+          fillColor = { default={0.1,0.4,0.8,0.8}, over={0.1,0.2,0.4,0.6} },
+          strokeColor = { default={0,0.2,0.4,0.8}, over={0.8,0.8,1,1} },
+          strokeWidth = 4
+      }
+  )
+  playButton.x = display.contentWidth- 5
+  playButton.y = display.contentHeight - playButton.height
+  playButton:addEventListener("touch",letsPlay)
+
+  uiGroup:insert(playButton)
+
+  local indietroButton = widget.newButton(
     {
-        label = "Play",
-        myName = "buttonPlay",
-        id = "playButton",
-        numero = 3,
-        emboss = false,
-        labelColor = { default={ 1, 1, 1 }, over={ 1, 0, 0, 0.5 } },
-        -- Properties for a rounded rectangle button
-        shape = "roundedRect",
-        width = 70,
-        height = 70,
-        cornerRadius = 20,
-        fillColor = { default={0.1,0.4,0.8,0.8}, over={0.1,0.2,0.4,0.6} },
-        strokeColor = { default={0,0.2,0.4,0.8}, over={0.8,0.8,1,1} },
-        strokeWidth = 4
+      label = "Back",
+      onRelease = previousPage,
+      emboss = false,
+      labelColor = { default={ 1, 1, 1 }, over={ 1, 0, 0, 0.5 } },
+      -- Properties for a rounded rectangle button
+      shape = "roundedRect",
+      width = 70,
+      height = 70,
+      cornerRadius = 20,
+      fillColor = { default={0.1,0.4,0.8,0.8}, over={0.1,0.2,0.4,0.6} },
+      strokeColor = { default={0,0.2,0.4,0.8}, over={0.8,0.8,1,1} },
+      strokeWidth = 4
+
     }
-)
-playButton.x = display.contentWidth- 5
-playButton.y = display.contentHeight - playButton.height
-playButton.nome = "ButtonPlay"
-playButton:addEventListener("touch",letsPlay)
-
-uiGroup:insert(playButton)
-
-local indietroButton = widget.newButton(
-  {
-    label = "Back",
-    onRelease = previousPage,
-    emboss = false,
-    labelColor = { default={ 1, 1, 1 }, over={ 1, 0, 0, 0.5 } },
-    -- Properties for a rounded rectangle button
-    shape = "roundedRect",
-    width = 70,
-    height = 70,
-    cornerRadius = 20,
-    fillColor = { default={0.1,0.4,0.8,0.8}, over={0.1,0.2,0.4,0.6} },
-    strokeColor = { default={0,0.2,0.4,0.8}, over={0.8,0.8,1,1} },
-    strokeWidth = 4
-
-  }
-)
-indietroButton.x = 5
-indietroButton.y = playButton.y 
-uiGroup:insert(indietroButton)
-
+  )
+  indietroButton.x = 5
+  indietroButton.y = playButton.y 
+  uiGroup:insert(indietroButton)
 
 end
+
 -- show()
 function scene:show( event )
- 
     local sceneGroup = self.view
     local phase = event.phase
- 
     if ( phase == "will" ) then
         -- Code here runs when the scene is still off screen (but is about to come on screen)
         print("... scene:show from will to -> did")
- 
+
     elseif ( phase == "did" ) then
         -- Code here runs when the scene is entirely on screen
           print("lvl selected = "..lvl_selected
- .."\n numero di personaggi = ".. #lvl_charTable[lvl_selected
-])
-
-
- 
+             .."\n numero di personaggi = ".. #lvl_charTable[lvl_selected])
     end
 end
- 
- 
+
 -- hide()
 function scene:hide( event )
- 
+
     local sceneGroup = self.view
     local phase = event.phase
- 
+
     if ( phase == "will" ) then
         -- Code here runs when the scene is on screen (but is about to go off screen)
- 
+
     elseif ( phase == "did" ) then
         -- Code here runs immediately after the scene goes entirely off screen
- 
+
     end
 end
- 
- 
+
+
 -- destroy()
 function scene:destroy( event )
- 
+
     local sceneGroup = self.view
     -- Code here runs prior to the removal of scene's view
- 
+
 end
- 
- 
+
+
 -- -----------------------------------------------------------------------------------
 -- Scene event function listeners
 -- -----------------------------------------------------------------------------------
