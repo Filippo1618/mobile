@@ -25,7 +25,9 @@ local uiGroup
 
 local buttonsTable = {}
 
--- scrollView listener
+-----------------------------------------------------------------------------------------
+
+-- funzione per gestire la scrollView
 local function scrollListener( event )
 	local phase = event.phase
 	local direction = event.direction
@@ -37,7 +39,7 @@ local function scrollListener( event )
 	elseif "ended" == phase then
 		print( "Ended.scrollListener" )
 	end
--- If the scrollView has reached its scroll limit
+  -- If the scrollView has reached its scroll limit
 	if event.limitReached then
 		if "up" == direction then
 			print( "Reached Top Limit" )
@@ -52,8 +54,8 @@ local function scrollListener( event )
 	return true
 end
 
---funzione per gestire gli oggetti tramite evento "touch"
-local function onObjectTouch( event )
+-- funzione per il set del livello e visualizzazione nemici
+local function setLvlEnemies( event )
   print("settato livello : ",lvl_selected)
   if ( event.phase == "began" ) then
     print( "Touch event began on: " .. event.target.id )
@@ -62,6 +64,7 @@ local function onObjectTouch( event )
   end
   return true
 end
+
 
 local function createVsGroup(lvl_selected)
 
@@ -100,9 +103,8 @@ local function onObjectTap( event )
   return true
 end
 
-
+-- Funzione per l'inizio della partita
 local function letsPlay(event)
-
   local phase = event.phase
   if (phase == "began") then
     print("event.target.id = "..event.target.id)
@@ -115,12 +117,13 @@ local function letsPlay(event)
   return true
 end
 
+-- funzione per tornare al menu
 local function previousPage()
   print("back to the menu")
   composer.gotoScene("menu",{effect = "fade", time = 200})
 end
 
-------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
 
 -- Create scene
 function scene:create( event )
@@ -151,7 +154,7 @@ function scene:create( event )
   local scrollView = widget.newScrollView (
     {
       width = display.contentWidth*1.2,
-      height = display.contentHeight,
+      height = display.contentHeight-90,
       left = -40,
       backgroundColor = backgroundColor,
       --isBounceEnabled = false,
@@ -166,56 +169,52 @@ function scene:create( event )
 
   --pulsantiLivelli
   local buttonMedioevo = widget.newButton(
-  {
-      width = lunghezzaLivelli,
-      height = altezzaLivelli,
-      label = "Medioevo 1000 D.C.",
-      textAllign ="center",
-      labelColor = { default={ 0.2, 0.2, 0.2 }, over={ 0, 0, 0, 0.5 } },
-      labelYOffset = altezzaLivelli/2 + 20,
-      top = 20,
-      left = 20,
-      defaultFile ="img/sfondo_medioevo.png",
-      onPress = function() lvl_selected= "medioevo"; composer.setVariable("lvl_selected",lvl_selected) ;end
-  }
+    {
+        width = lunghezzaLivelli,
+        height = altezzaLivelli,
+        label = "Medioevo 1000 D.C.",
+        textAllign ="center",
+        labelColor = { default={ 255,140,0 }, over={ 75,0,130 } },
+        labelYOffset = altezzaLivelli/2 + 20,
+        top = 20,
+        left = 20,
+        defaultFile ="img/sfondo_medioevo.png",
+        onPress = function() lvl_selected = "medioevo"; composer.setVariable("lvl_selected",lvl_selected); end
+    }
   )
   buttonMedioevo:addEventListener( "tap", onObjectTap )
 
   local buttonRinascimento = widget.newButton(
-  {
-    width = lunghezzaLivelli,
-    height = altezzaLivelli,
-    label = "Rinascimento 1500 D.C.",
-    textAllign ="center",
-    labelColor = { default={ 0.2, 0.2, 0.2  }, over={ 0, 0, 0, 0.5 } },
-    labelYOffset = altezzaLivelli/2 + 20,
-    top = 20,
-    left = 20,
-    defaultFile ="img/sfondo_rinascimento.png",
-    onPress = function() lvl_selected
-  = "rinascimento";composer.setVariable("lvl_selected",lvl_selected
-  ) ; end
-  })
+    {
+      width = lunghezzaLivelli,
+      height = altezzaLivelli,
+      label = "Rinascimento 1500 D.C.",
+      textAllign ="center",
+      labelColor = { default={ 255,140,0 }, over={ 75,0,130 } },
+      labelYOffset = altezzaLivelli/2 + 20,
+      top = 20,
+      left = 20,
+      defaultFile ="img/sfondo_rinascimento.png",
+      onPress = function() lvl_selected = "rinascimento"; composer.setVariable("lvl_selected",lvl_selected); end
+    }
+  )
   buttonRinascimento:addEventListener( "tap", onObjectTap )
 
 
   local buttonRisorgimento = widget.newButton(
-  {
-    width = lunghezzaLivelli,
-    height = altezzaLivelli,
-    label = "Risorgimento 1700 D.C.",
-    textAllign ="center",
-    labelColor = { default={ 0.2, 0.2, 0.2  }, over={ 0, 0, 0, 0.5 } },
-    labelYOffset = altezzaLivelli/2 + 20,
-    top = 20,
-    left = 20,
-    defaultFile ="img/sfondo_risorgimento.png",
-    onPress = function() lvl_selected
-  = "risorgimento";composer.setVariable("lvl_selected",lvl_selected
-  ) ; end
-
-  })
-
+    {
+      width = lunghezzaLivelli,
+      height = altezzaLivelli,
+      label = "Risorgimento 1700 D.C.",
+      textAllign ="center",
+      labelColor = { default={ 255,140,0 }, over={ 75,0,130 } },
+      labelYOffset = altezzaLivelli/2 + 20,
+      top = 20,
+      left = 20,
+      defaultFile ="img/sfondo_risorgimento.png",
+      onPress = function() lvl_selected = "risorgimento"; composer.setVariable("lvl_selected",lvl_selected); end
+    }
+  )
   buttonRisorgimento:addEventListener( "tap", onObjectTap )
 
   local button1900 = widget.newButton(
@@ -225,16 +224,14 @@ function scene:create( event )
     label = "Età Moderna 1900 D.C.",
     myName = "eta_moderna",
     textAllign ="center",
-    labelColor = { default={ 0.2, 0.2, 0.2  }, over={ 0, 0, 0, 0.5 } },
+    labelColor = { default={ 255,140,0 }, over={ 75,0,130 } },
     labelYOffset = altezzaLivelli/2 + 20,
     top = 20,
     left = 20,
     defaultFile ="img/sfondo_1900.png",
-    onPress = function() lvl_selected
-  = "eta_moderna";composer.setVariable("lvl_selected",lvl_selected
-  ) ; end
-  })
-
+    onPress = function() lvl_selected = "eta_moderna"; composer.setVariable("lvl_selected",lvl_selected); end
+  }
+  )
   button1900:addEventListener( "tap", onObjectTap )
 
 
@@ -244,13 +241,13 @@ function scene:create( event )
   table.insert( buttonsTable, buttonRisorgimento )
   table.insert( buttonsTable, button1900 )
 
-  --inserimento dei pulsanti nella scrollView
+  -- inserimento dei pulsanti nella scrollView
   for i=1,table.maxn( buttonsTable ) do
     buttonsTable[i].x = i*lunghezzaLivelli + (i-1)*100
     scrollView:insert(buttonsTable[i])
   end
 
-  --Pulsante Gioca
+  -- Pulsante play
   local playButton = widget.newButton(
       {
           id = "playButton",
@@ -265,19 +262,18 @@ function scene:create( event )
           cornerRadius = 20,
           fillColor = { default={0.1,0.4,0.8,0.8}, over={0.1,0.2,0.4,0.6} },
           strokeColor = { default={0,0.2,0.4,0.8}, over={0.8,0.8,1,1} },
-          strokeWidth = 4
+          strokeWidth = 4,
+          onRelease = letsPlay
       }
   )
-  playButton.x = display.contentWidth- 5
-  playButton.y = display.contentHeight - playButton.height
-  playButton:addEventListener("touch",letsPlay)
-
+  playButton.x = display.contentWidth-5
+  playButton.y = display.contentHeight-50
   uiGroup:insert(playButton)
 
-  local indietroButton = widget.newButton(
+  -- Pulsante back
+  local backButton = widget.newButton(
     {
       label = "Back",
-      onRelease = previousPage,
       emboss = false,
       labelColor = { default={ 1, 1, 1 }, over={ 1, 0, 0, 0.5 } },
       -- Properties for a rounded rectangle button
@@ -287,15 +283,16 @@ function scene:create( event )
       cornerRadius = 20,
       fillColor = { default={0.1,0.4,0.8,0.8}, over={0.1,0.2,0.4,0.6} },
       strokeColor = { default={0,0.2,0.4,0.8}, over={0.8,0.8,1,1} },
-      strokeWidth = 4
-
+      strokeWidth = 4,
+      onRelease = previousPage
     }
   )
-  indietroButton.x = 5
-  indietroButton.y = playButton.y 
-  uiGroup:insert(indietroButton)
+  backButton.x = 5
+  backButton.y = playButton.y
+  uiGroup:insert(backButton)
 
 end
+
 
 -- show()
 function scene:show( event )
@@ -324,7 +321,6 @@ function scene:hide( event )
   end
 end
 
-
 -- destroy()
 function scene:destroy( event )
 
@@ -332,7 +328,6 @@ function scene:destroy( event )
   -- Code here runs prior to the removal of scene's view
 
 end
-
 
 -- -----------------------------------------------------------------------------------
 -- Scene event function listeners

@@ -10,6 +10,8 @@ local scene = composer.newScene()
 
 local group
 
+-----------------------------------------------------------------------------------------
+
 local function turnBackRelease( event )
     if ( "ended" == event.phase ) then
         print( "menu, di nuovo" )
@@ -17,6 +19,7 @@ local function turnBackRelease( event )
     end
 end
 
+-----------------------------------------------------------------------------------------
 
 -- create()
 function scene:create( event )

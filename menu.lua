@@ -18,6 +18,9 @@ local mainGroup
 local backGroup
 local uiGroup
 
+-----------------------------------------------------------------------------------------
+
+-- funzione start
 local function startRelease( event )
     if ( "ended" == event.phase ) then
         print( "scegli il livello" )
@@ -32,7 +35,7 @@ local function optionRelease( event )
     end
 end
 
--- Function to handle button events
+-- funzione per verificare se funziona il pulsante
 local function handleButtonEvent( event )
     if ( "ended" == event.phase ) then
         print( "Button was pressed and released" )
@@ -43,6 +46,8 @@ end
 function scene:resumeGame()
     -- Code to resume game
 end
+
+-----------------------------------------------------------------------------------------
 
 -- create()
 -- Code here runs when the scene is first created but has not yet appeared on screen
