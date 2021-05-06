@@ -59,7 +59,7 @@ function scene:create( event )
     uiGroup = display.newGroup()
     sceneGroup:insert(uiGroup)
 
-    local background = display.newImageRect(backGroup,"img/spacecartoon.jpg",480*1.2,320*1.2)
+    local background = display.newImageRect(backGroup,"img/sfondo_spacecartoon.jpg",480*1.2,320*1.2)
     background.x = display.contentCenterX
     background.y = display.contentCenterY
 
@@ -67,18 +67,18 @@ function scene:create( event )
     tlfText.x = display.contentCenterX
     tlfText.y = display.contentCenterY-95
 
-    local playButton = widget.newButton(
+    local startButton = widget.newButton(
        {
-            id = "playButton",
+            id = "startButton",
             defaultFile = "img/start.png",
             overFile = "img/startover.png",
             onRelease = startRelease
       }
     )
-    playButton.x = display.contentCenterX
-    playButton.y = display.contentCenterY+10
+    startButton.x = display.contentCenterX
+    startButton.y = display.contentCenterY+10
 
-    uiGroup:insert(playButton)
+    uiGroup:insert(startButton)
 
     local tutorialButton = widget.newButton(
         {
@@ -108,7 +108,7 @@ function scene:create( event )
 
     uiGroup:insert(optionButton)
 
-    local character = display.newImageRect(mainGroup,"img/illustratorSX.png",45,70)
+    local character = display.newImageRect(mainGroup,"img/characters/illustratorSX.png",45,70)
     character.x = display.contentWidth*4/5
     character.y = display.contentHeight*2/3
 end

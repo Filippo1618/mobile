@@ -3,8 +3,8 @@ local composer = require("composer")
 local characters =
 {--1 (player)
     { --properties
-    img = "img/illustratorDX.png",
-    imgSX = "img/illustratorSX.png",
+    img = "img/characters/illustratorDX.png",
+    imgSX = "img/characters/illustratorSX.png",
     name = "player",
     type = "neutral",
     isAvailable = true,
@@ -75,8 +75,8 @@ local characters =
     },
     --2
     {
-    img = "img/father_Time_DX.png",
-    imgSX = "img/father_Time_SX.png",
+    img = "img/characters/father_Time_DX.png",
+    imgSX = "img/characters/father_Time_SX.png",
     name = "Father",
     type = "neutral",
     isAvailable = false,
@@ -149,8 +149,8 @@ local characters =
     },
     --3
     {
-        img = "img/philosopher_DX.png",
-        imgSX = "img/philosopher_SX.png",
+        img = "img/characters/philosopher_DX.png",
+        imgSX = "img/characters/philosopher_SX.png",
         name = "philosopher",
         type = "neutral",
         isAvailable = false,
@@ -222,8 +222,8 @@ local characters =
     },
     --4
     {
-        img = "img/socrates_DX.png",
-        imgSX = "img/socrates_SX.png",
+        img = "img/characters/socrates_DX.png",
+        imgSX = "img/characters/socrates_SX.png",
         name = "socrates",
         type = "neutral",
         isAvailable = true,
@@ -293,8 +293,8 @@ local characters =
     },
     --5
     {
-        img = "img/zeus_DX.png",
-        imgSX = "img/zeus_SX.png",
+        img = "img/characters/zeus_DX.png",
+        imgSX = "img/characters/zeus_SX.png",
         name = "zeus",
         type = "neutral",
         isAvailable = true,
