@@ -11,11 +11,11 @@ local scene = composer.newScene()
 local lunghezzaLivelli = 161*1.3
 local altezzaLivelli = 100*1.3
 
-local lvl_selected= composer.getVariable("lvl_selected")
+local lvl_selected = composer.getVariable("lvl_selected")
 
 local personaggi = composer.getVariable("personaggi")
 
-local lvl_charTable = composer.getVariable("lvl_charTable")
+local lvl_charTable = composer.getVariable("levels")
 
 
 local vsTeamGroup
@@ -321,12 +321,9 @@ function scene:show( event )
     local phase = event.phase
     if ( phase == "will" ) then
         -- Code here runs when the scene is still off screen (but is about to come on screen)
-        print("... scene:show from will to -> did")
 
     elseif ( phase == "did" ) then
         -- Code here runs when the scene is entirely on screen
-          print("lvl selected = "..lvl_selected
-             .."\n numero di personaggi = ".. #lvl_charTable[lvl_selected])
     end
 end
 

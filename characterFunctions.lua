@@ -1,4 +1,5 @@
 ---@diagnostic disable: undefined-global
+
 require("spots")
 local widget = require "widget"
 

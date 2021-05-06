@@ -108,7 +108,7 @@ function scene:create( event )
 
     uiGroup:insert(optionButton)
 
-    local character = display.newImageRect(mainGroup,"img/IllustratorSX.png",45,70)
+    local character = display.newImageRect(mainGroup,"img/illustratorSX.png",45,70)
     character.x = display.contentWidth*4/5
     character.y = display.contentHeight*2/3
 end
