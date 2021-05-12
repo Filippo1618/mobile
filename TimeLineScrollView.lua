@@ -12,17 +12,15 @@ local scene = composer.newScene()
 local lunghezzaLivelli = 161*1.3
 local altezzaLivelli = 100*1.3
 
-local lvl_selected = composer.getVariable("lvl_selected")
+local lvl_selected = composer.getVariable("start_lvl")
 local lvl_charTable = composer.getVariable("levels")
-local charsCollection = composer.getVariable("charsCollection")
-
-local vsTeamGroup
-local vsTeamTable = {}
+local characters = composer.getVariable("characters")
 
 local backGroup
 local mainGroup
 local uiGroup
-
+local vsTeamGroup
+local vsTeamTable = {}
 local buttonsTable = {}
 
 -----------------------------------------------------------------------------------------
@@ -96,7 +94,6 @@ local function onObjectTap( event )
       table.remove(vsTeamTable,i)
       display.remove(char)
       char = nil
-
     end
   end
   createVsGroup(lvl_selected)
@@ -106,13 +103,18 @@ end
 -- Funzione per l'inizio della partita
 local function letsPlay(event)
   local phase = event.phase
+
   if (phase == "began") then
     print("event.target.id = "..event.target.id)
     print("event.target.label = "..event.target.nome)
   elseif (phase == "ended") then
-    print("Livello selezionato:\n"..lvl_selected.."!!\nsi giocaaaaa!")
-    composer.setVariable("vsTeamTable",vsTeamTable)
-    composer.gotoScene("game",{effect ="fade",time = 400})
+    if(lvl_selected == nil) then
+      print("Nessun livello selezionato :(\n")
+    else
+      print("Livello selezionato:\n"..lvl_selected.."!!\nsi giocaaaaa!")
+      composer.setVariable("vsTeamTable",vsTeamTable)
+      composer.gotoScene("game",{effect ="fade",time = 400})
+    end
   end
   return true
 end

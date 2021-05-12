@@ -366,7 +366,7 @@ local characters =
 }
 
 -- set the variable characters
-composer.setVariable("characters", characters)
+--composer.setVariable("characters", characters)
 
 
 local CharactersCollection = {}
@@ -393,5 +393,4 @@ function AddCharToCollection (char)
 end
 
 AddCharToCollection(characters[1])
-composer.setVariable("charsCollection", charsCollection)
-
+composer.setVariable("characters", charactersCollection)
