@@ -369,29 +369,29 @@ local characters =
 composer.setVariable("characters", characters)
 
 
---local CharactersCollection = {}
+local CharactersCollection = {}
   --Funzione per copiare tabelle in modo ricorsivo
---local function deepcopy(orig)
-  --local orig_type = type(orig)
-  --local copy
-  --if orig_type == 'table' then
-      --copy = {}
-      --for orig_key, orig_value in next, orig, nil do
-          --copy[deepcopy(orig_key)] = deepcopy(orig_value)
-      --end
-      --setmetatable(copy, deepcopy(getmetatable(orig)))
-  --else -- number, string, boolean, etc
-      --copy = orig
-  --end
-  --return copy
---end
+local function deepcopy(orig)
+  local orig_type = type(orig)
+  local copy
+  if orig_type == 'table' then
+      copy = {}
+      for orig_key, orig_value in next, orig, nil do
+          copy[deepcopy(orig_key)] = deepcopy(orig_value)
+      end
+      setmetatable(copy, deepcopy(getmetatable(orig)))
+  else -- number, string, boolean, etc
+      copy = orig
+  end
+  return copy
+end
 
 --copia una tabella char in CharactersCollection
---function AddCharToCollection (char)
- --local newChar = deepcopy(char)
- --table.insert(CharactersCollection, newChar)
---end
+function AddCharToCollection (char)
+ local newChar = deepcopy(char)
+ table.insert(CharactersCollection, newChar)
+end
 
---AddCharToCollection(characters[1])
---composer.setVariable("charsCollection", charsCollection)
+AddCharToCollection(characters[1])
+composer.setVariable("charsCollection", charsCollection)
 

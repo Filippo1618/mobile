@@ -14,7 +14,7 @@ local altezzaLivelli = 100*1.3
 
 local lvl_selected = composer.getVariable("lvl_selected")
 local lvl_charTable = composer.getVariable("levels")
-local charsCollection = composer.getVariable("characters")
+local charsCollection = composer.getVariable("charsCollection")
 
 local vsTeamGroup
 local vsTeamTable = {}
@@ -254,7 +254,7 @@ function scene:create( event )
           label = "Play",
           numero = 3,
           emboss = false,
-          labelColor = { default={ 1, 1, 1 }, over={ 1, 0, 0, 0.5 } },
+          labelColor = { default={ 1, 1, 1 }, over={ 255,140,0 } },
           -- Properties for a rounded rectangle button
           shape = "roundedRect",
           width = 70,
@@ -266,7 +266,7 @@ function scene:create( event )
           onRelease = letsPlay
       }
   )
-  playButton.x = display.contentWidth-5
+  playButton.x = display.contentWidth-15
   playButton.y = display.contentHeight-50
   uiGroup:insert(playButton)
 
@@ -275,7 +275,7 @@ function scene:create( event )
     {
       label = "Back",
       emboss = false,
-      labelColor = { default={ 1, 1, 1 }, over={ 1, 0, 0, 0.5 } },
+      labelColor = { default={ 1, 1, 1 }, over={ 255,140,0  } },
       -- Properties for a rounded rectangle button
       shape = "roundedRect",
       width = 70,
@@ -287,7 +287,7 @@ function scene:create( event )
       onRelease = previousPage
     }
   )
-  backButton.x = 5
+  backButton.x = 15
   backButton.y = playButton.y
   uiGroup:insert(backButton)
 
