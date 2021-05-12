@@ -1,6 +1,6 @@
 -----------------------------------------------------------------------------------------
 --
--- option.lua
+-- options.lua
 --
 -----------------------------------------------------------------------------------------
 
@@ -17,6 +17,11 @@ local function turnBackRelease( event )
         print( "menu, di nuovo" )
         composer.hideOverlay( {recycleOnly = true, effect = "slideRight", time = 300} )
     end
+end
+
+-- Slider listener
+local function sliderListener( event )
+    print( "Slider at " .. event.value .. "%" )
 end
 
 -----------------------------------------------------------------------------------------
@@ -37,18 +42,40 @@ function scene:create( event )
     background.width = display.contentWidth
     group: insert(background)
 
-    local resumeButton = widget.newButton(
+    local volumeText = display.newText(
         {
             fontSize = 30,
+            text = "Volume",
+            x = display.contentCenterX-140,
+            y = display.contentCenterY,
+        }
+    )
+    volumeText:setFillColor(255,140,0)
+    group:insert(volumeText)
+
+    local resumeButton = widget.newButton(
+        {
+            fontSize = 25,
             id = "resumeButton",
             label = "indietro",
             labelColor = { default={ 255,140,0 }, over={ 75,0,130 } },
             onRelease = turnBackRelease
         }
     )
-    resumeButton.x = display.contentCenterX-145
-    resumeButton.y = display.contentCenterY+70
+    resumeButton.x = display.contentCenterX+165
+    resumeButton.y = display.contentCenterY+90
     group:insert(resumeButton)
+
+    local volumeSlider = widget.newSlider(
+        {
+            x = display.contentCenterX+60,
+            y = display.contentCenterY,
+            width = 200,
+            value = 50,  -- Start slider at 50% (optional)
+            listener = sliderListener
+        }
+    )
+    group:insert(volumeSlider)
 
 end
 

@@ -31,7 +31,7 @@ end
 local function optionRelease( event )
     if ( "ended" == event.phase ) then
         print( "opzioni" )
-        composer.showOverlay( "option", { isModal = true, effect = "slideRight", time = 200 } )
+        composer.showOverlay( "options", { isModal = true, effect = "slideRight", time = 200 } )
     end
 end
 
@@ -98,9 +98,9 @@ function scene:create( event )
 
     uiGroup:insert(tutorialButton)
 
-    local optionButton = widget.newButton(
+    local optionsButton = widget.newButton(
         {
-            id = "optionButton",
+            id = "optionsButton",
             defaultFile = "img/opt.png",
             overFile = "img/optover.png",
             width = 50,
@@ -108,10 +108,10 @@ function scene:create( event )
             onRelease = optionRelease
         }
     )
-    optionButton.x = display.contentCenterX+230
-    optionButton.y = display.contentCenterY+120
+    optionsButton.x = display.contentCenterX+230
+    optionsButton.y = display.contentCenterY+120
 
-    uiGroup:insert(optionButton)
+    uiGroup:insert(optionsButton)
 
     local character = display.newImageRect(mainGroup,"img/characters/illustratorSX.png",45,70)
     character.x = display.contentWidth*4/5
