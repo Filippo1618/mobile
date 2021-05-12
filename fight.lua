@@ -2,13 +2,12 @@
 
 
 require("spots")
-require ("character")
+require ("characters")
 require ("skillsBar")
 require ("turnTable")
 require("background")
 
 local widget = require "widget"
-
 local composer = require( "composer" )
 local scene = composer.newScene()
 

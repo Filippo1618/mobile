@@ -1,7 +1,8 @@
 local composer = require("composer")
 
 local characters =
-{--1 (player)
+{
+    --1 (player)
     { --properties
     img = "img/characters/illustratorDX.png",
     imgSX = "img/characters/illustratorSX.png",
