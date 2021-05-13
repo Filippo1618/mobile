@@ -9,8 +9,7 @@ display.setStatusBar( display.HiddenStatusBar )
 
 local composer = require ("composer")
 
--- Start at menu
-composer.gotoScene( "menu", {effect = "fade", time = 200} )
+
 --GLOBAL
 DisplayWidth = display.contentWidth
 DisplayHeight = display.contentHeight
@@ -426,3 +425,6 @@ lvl_charTable["1900"] = { 5,4,5 }
 lvl_charTable["eta_moderna"] = { 5,5,5 }
 
 composer.setVariable("lvl_charTable", lvl_charTable)
+
+-- Start at menu
+composer.gotoScene( "menu", {effect = "fade", time = 200} )
