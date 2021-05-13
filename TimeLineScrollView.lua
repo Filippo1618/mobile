@@ -63,25 +63,15 @@ local function setLvlEnemies( event )
   return true
 end
 
-local function createVsGroup(lvl_selected)
-
-  local char1 = display.newImageRect(vsTeamGroup,lvl_charTable[lvl_selected][1].imgSX,45,80)
-  char1.myName = lvl_charTable[lvl_selected][1]
-  char1.x = 50
-  char1.y = 15
-  table.insert(vsTeamTable,char1)
-
-  local char2 = display.newImageRect(vsTeamGroup,lvl_charTable[lvl_selected][2].imgSX,45,80)
-  char2.myName = lvl_charTable[lvl_selected][2]
-  char2.x = char1.x + 90
-  char2.y = char1.y
-  table.insert(vsTeamTable,char2)
-
-  local char3 = display.newImageRect(vsTeamGroup,lvl_charTable[lvl_selected][3].imgSX,45,80)
-  char3.myName = lvl_charTable[lvl_selected][3]
-  char3.x = char2.x + 90
-  char3.y = char1.y
-  table.insert(vsTeamTable,char3)
+local function createVsGroup(lvl_charsID)
+  
+  for i = 1 , #lvl_charsID do
+    local char = display.newImageRect(vsTeamGroup,characters[lvl_charsID[i]].imgSX,45,80)
+    print(characters[lvl_charsID[1]].name)
+    char.x = 50 +(90*(i-1))
+    char.y = 15
+    table.insert(vsTeamTable,char)
+  end
 
 end
 
@@ -98,7 +88,11 @@ local function onObjectTap( event )
       char = nil
     end
   end
-  createVsGroup(lvl_selected)
+
+  local lvlName = event.target.lvl
+  composer.setVariable("lvl_selected",lvlName)
+  local lvlCharsID = lvl_charTable[lvlName]
+  createVsGroup(lvlCharsID)
   return true
 end
 
@@ -186,13 +180,9 @@ function scene:create( event )
         top = 20,
         left = 20,
         defaultFile ="img/sfondo_medioevo.png",
-        onPress = function() lvl_selected = "medioevo"
-           composer.setVariable("lvl_selected",lvl_selected)
-           composer.setVariable("vsTeamTable",lvl_charTable["lvl_selected"])
-           end
-
       }
   )
+  buttonMedioevo.lvl = "medioevo"
   buttonMedioevo:addEventListener( "tap", onObjectTap )
 
   local buttonRinascimento = widget.newButton(
