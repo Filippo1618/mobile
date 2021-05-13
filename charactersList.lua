@@ -1,30 +1,15 @@
 -----------------------------------------------------------------------------------------
 --
--- main.lua
---
------------------------------------------------------------------------------------------
-
---baseStatusBar setted to hide
-display.setStatusBar( display.HiddenStatusBar )
-
-local composer = require ("composer")
-
--- Start at menu
-composer.gotoScene( "menu", {effect = "fade", time = 200} )
---GLOBAL
-DisplayWidth = display.contentWidth
-DisplayHeight = display.contentHeight
-
------------------------------------------------------------------------------------------
---
 -- characters.lua
 --
 -----------------------------------------------------------------------------------------
 
+local composer = require("composer")
+
 local characters =
 {
     --1 (player)
-    { --properties/infoChar
+    { --properties
     img = "img/characters/illustratorDX.png",
     imgSX = "img/characters/illustratorSX.png",
     name = "player",
@@ -413,21 +398,5 @@ function AddCharToCollection (char)
  table.insert(CharactersCollection, newChar)
 end
 
-AddCharToCollection(characters[1]) -- Collezione chars disponibili per fight
-composer.setVariable("characters", characters) -- tutti i chars
-
------------------------------------------------------------------------------------------
---
--- levels.lua
---
------------------------------------------------------------------------------------------
-
---local characters = composer.getVariable("characters")
-
-local lvl_charTable = {}
-lvl_charTable["medioevo"] = { 2,2,3 }
-lvl_charTable["rinascimento"] = { 3,3,4 }
-lvl_charTable["risorgimento"] = { 4,4,5 }
-lvl_charTable["1900"] = { 5,5,5 }
-
-composer.setVariable("lvl_charTable", lvl_charTable)
+AddCharToCollection(characters[1])
+composer.setVariable("characters", charactersCollection)
