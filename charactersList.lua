@@ -371,12 +371,9 @@ local characters =
     },
 }
 
--- set the variable characters
---composer.setVariable("characters", characters)
-
-
 local charactersCollection = {}
-  --Funzione per copiare tabelle in modo ricorsivo
+
+--Funzione per copiare tabelle in modo ricorsivo
 local function deepcopy(orig)
   local orig_type = type(orig)
   local copy

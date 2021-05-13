@@ -1,6 +1,6 @@
 -----------------------------------------------------------------------------------------
 --
--- TimelineScrollView.lua
+-- timelineScrollView.lua
 --
 -----------------------------------------------------------------------------------------
 
@@ -14,7 +14,8 @@ local altezzaLivelli = 100*1.3
 
 local characters = composer.getVariable("characters")
 local lvl_charTable = composer.getVariable("lvl_charTable")
-local lvl_selected = composer.getVariable("start_lvl")
+--local lvl_selected = composer.getVariable("start_lvl")
+local lvl_selected = nil
 
 local backGroup
 local mainGroup
@@ -65,6 +66,7 @@ local function createVsGroup(lvl_charsID)
   end
 
 end
+
 
 local function onObjectTap( event )
   --se la vsTeamTable non è vuota allora la pulisco
