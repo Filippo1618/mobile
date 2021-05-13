@@ -1,6 +1,6 @@
 -----------------------------------------------------------------------------------------
 --
--- timelineScrollView.lua
+-- TimelineScrollView.lua
 --
 -----------------------------------------------------------------------------------------
 
@@ -64,7 +64,7 @@ local function setLvlEnemies( event )
 end
 
 local function createVsGroup(lvl_charsID)
-  
+
   for i = 1 , #lvl_charsID do
     local char = display.newImageRect(vsTeamGroup,characters[lvl_charsID[i]].imgSX,45,80)
     print("i = " .. i .. " ID = ".. lvl_charsID[i])
