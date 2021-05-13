@@ -67,7 +67,8 @@ local function createVsGroup(lvl_charsID)
   
   for i = 1 , #lvl_charsID do
     local char = display.newImageRect(vsTeamGroup,characters[lvl_charsID[i]].imgSX,45,80)
-    print(characters[lvl_charsID[1]].name)
+    print("i = " .. i .. " ID = ".. lvl_charsID[i])
+    print(characters[lvl_charsID[i]].name)
     char.x = 50 +(90*(i-1))
     char.y = 15
     table.insert(vsTeamTable,char)
@@ -196,9 +197,9 @@ function scene:create( event )
       top = 20,
       left = 20,
       defaultFile ="img/sfondo_rinascimento.png",
-      onPress = function() lvl_selected = "rinascimento"; composer.setVariable("lvl_selected",lvl_selected); end
     }
   )
+  buttonRinascimento.lvl = "rinascimento"
   buttonRinascimento:addEventListener( "tap", onObjectTap )
 
 
@@ -213,9 +214,9 @@ function scene:create( event )
       top = 20,
       left = 20,
       defaultFile ="img/sfondo_risorgimento.png",
-      onPress = function() lvl_selected = "risorgimento"; composer.setVariable("lvl_selected",lvl_selected); end
     }
   )
+  buttonRisorgimento.lvl = "risorgimento"
   buttonRisorgimento:addEventListener( "tap", onObjectTap )
 
   local button1900 = widget.newButton(
@@ -230,9 +231,9 @@ function scene:create( event )
     top = 20,
     left = 20,
     defaultFile ="img/sfondo_1900.png",
-    onPress = function() lvl_selected = "eta_moderna"; composer.setVariable("lvl_selected",lvl_selected); end
   }
   )
+  button1900.lvl = "1900"
   button1900:addEventListener( "tap", onObjectTap )
 
 

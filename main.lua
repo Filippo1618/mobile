@@ -428,6 +428,6 @@ local lvl_charTable = {}
 lvl_charTable["medioevo"] = { 2,2,3 }
 lvl_charTable["rinascimento"] = { 3,3,4 }
 lvl_charTable["risorgimento"] = { 4,4,5 }
-lvl_charTable["eta_moderna"] = { 5,5,5 }
+lvl_charTable["1900"] = { 5,5,5 }
 
 composer.setVariable("lvl_charTable", lvl_charTable)
