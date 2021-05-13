@@ -2,13 +2,13 @@
 
 
 require("spots")
-require ("character")
-require ("skillsBar")
-require ("turnTable")
+require("character")
+require("skillsBar")
+require("turnTable")
 require("background")
 
-local widget = require "widget"
-local composer = require( "composer" )
+local widget = require("widget")
+local composer = require("composer")
 local scene = composer.newScene()
 
 local backGroup
@@ -96,10 +96,7 @@ local allySpotsProperties = {
     -- ecc ecc
 }
 
--- -----------------------------------------------------------------------------------
--- Code outside of the scene event functions below will only be executed ONCE unless
--- the scene is removed entirely (not recycled) via "composer.removeScene()"
--- -----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
 
 local function getRandomSpots(n) --DA SPOSTARE IN SPOTS.LUA
     local rndArray ={}
@@ -274,7 +271,7 @@ end
 
 local function getPlayerOnTurn()
     local player = turnTable:getPlayerOnTurn()
-    if player == nil then 
+    if player == nil then
         print("errore: nessun personaggio settato per il turno corrente ?!?!")
     end
     return player
