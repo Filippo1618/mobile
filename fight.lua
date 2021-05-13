@@ -83,7 +83,7 @@ local gameOver = false
 
 local chars = composer.getVariable("characters")
 --local lvlChars ={chars[3],chars[4],chars[3]} --mandato come proprieta
-local lvlChars =composer.getVariable("vsTeamTable")
+local lvlChars = composer.getVariable("vsTeamTable")
 local enemySpotsProperties = {
     isEnemy = true,
     type = {"blt","blm","blb","flt","flm","flb"},
@@ -313,7 +313,7 @@ function scene:create( event )
 	local sceneGroup = self.view
 	-- Code here runs when the scene is first created but has not yet appeared on screen
 
-    backGroup = NewBackground("img/sfondo480-320.png")
+    backGroup = NewBackground("img/sfondo.png")
     
     skillsBarGroup = NewSkillsBar()
     

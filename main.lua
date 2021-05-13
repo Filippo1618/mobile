@@ -11,7 +11,9 @@ local composer = require ("composer")
 
 -- Start at menu
 composer.gotoScene( "menu", {effect = "fade", time = 200} )
-
+--GLOBAL
+DisplayWidth = display.contentWidth
+DisplayHeight = display.contentHeight
 
 -----------------------------------------------------------------------------------------
 --
@@ -22,7 +24,7 @@ composer.gotoScene( "menu", {effect = "fade", time = 200} )
 local characters =
 {
     --1 (player)
-    { --properties
+    { --properties/infoChar
     img = "img/characters/illustratorDX.png",
     imgSX = "img/characters/illustratorSX.png",
     name = "player",
@@ -429,7 +431,4 @@ lvl_charTable["rinascimento"] = { characters[3],characters[3],characters[4] }
 lvl_charTable["risorgimento"] = { characters[4],characters[4],characters[5] }
 lvl_charTable["eta_moderna"] = { characters[5],characters[5],characters[5] }
 
-local start_lvl = lvl_charTable["nessuno"]
-
 composer.setVariable("lvl_charTable", lvl_charTable)
-composer.setVariable("start_lvl", start_lvl)

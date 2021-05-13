@@ -12,9 +12,9 @@ local scene = composer.newScene()
 local lunghezzaLivelli = 161*1.3
 local altezzaLivelli = 100*1.3
 
-local lvl_selected = composer.getVariable("start_lvl")
-local lvl_charTable = composer.getVariable("lvl_charTable")
 local characters = composer.getVariable("characters")
+local lvl_charTable = composer.getVariable("lvl_charTable")
+local lvl_selected = nil
 
 local backGroup
 local mainGroup
@@ -115,7 +115,9 @@ local function letsPlay(event)
       print(lvl_selected)
     else
       print("Livello selezionato: "..lvl_selected.."!!\nSi giocaaaaa!")
-      composer.setVariable("vsTeamTable",vsTeamTable)
+      for i=1,#vsTeamTable do
+        print(vsTeamTable[i].name)
+      end
       composer.gotoScene("fight",{effect ="fade",time = 400})
     end
   end
@@ -184,8 +186,12 @@ function scene:create( event )
         top = 20,
         left = 20,
         defaultFile ="img/sfondo_medioevo.png",
-        onPress = function() lvl_selected = "medioevo"; composer.setVariable("lvl_selected",lvl_selected); end
-    }
+        onPress = function() lvl_selected = "medioevo"
+           composer.setVariable("lvl_selected",lvl_selected)
+           composer.setVariable("vsTeamTable",lvl_charTable["lvl_selected"])
+           end
+
+      }
   )
   buttonMedioevo:addEventListener( "tap", onObjectTap )
 
