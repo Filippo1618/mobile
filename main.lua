@@ -386,10 +386,6 @@ local characters =
     },
 }
 
--- set the variable characters
---composer.setVariable("characters", characters)
-
-
 local CharactersCollection = {}
   --Funzione per copiare tabelle in modo ricorsivo
 local function deepcopy(orig)
@@ -421,8 +417,6 @@ composer.setVariable("characters", characters) -- tutti i chars
 -- levels.lua
 --
 -----------------------------------------------------------------------------------------
-
---local characters = composer.getVariable("characters")
 
 local lvl_charTable = {}
 lvl_charTable["medioevo"] = { 2,2,3 }

@@ -14,7 +14,6 @@ local altezzaLivelli = 100*1.3
 
 local characters = composer.getVariable("characters")
 local lvl_charTable = composer.getVariable("lvl_charTable")
---local lvl_selected = composer.getVariable("start_lvl")
 local lvl_selected = nil
 
 local backGroup
