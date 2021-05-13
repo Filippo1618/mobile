@@ -94,7 +94,7 @@ function scene:create( event )
         }
     )
     tutorialButton.x = display.contentCenterX-180
-    tutorialButton.y = display.contentCenterY+120
+    tutorialButton.y = display.contentCenterY+116
 
     uiGroup:insert(tutorialButton)
 

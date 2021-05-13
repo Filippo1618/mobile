@@ -13,7 +13,7 @@ local lunghezzaLivelli = 161*1.3
 local altezzaLivelli = 100*1.3
 
 local lvl_selected = composer.getVariable("start_lvl")
-local lvl_charTable = composer.getVariable("levels")
+local lvl_charTable = composer.getVariable("lvl_charTable")
 local characters = composer.getVariable("characters")
 
 local backGroup
@@ -63,22 +63,24 @@ local function setLvlEnemies( event )
   return true
 end
 
-
 local function createVsGroup(lvl_selected)
 
   local char1 = display.newImageRect(vsTeamGroup,lvl_charTable[lvl_selected][1].imgSX,45,80)
   char1.myName = lvl_charTable[lvl_selected][1]
-  char1.x = 80
+  char1.x = 50
+  char1.y = 15
   table.insert(vsTeamTable,char1)
 
   local char2 = display.newImageRect(vsTeamGroup,lvl_charTable[lvl_selected][2].imgSX,45,80)
   char2.myName = lvl_charTable[lvl_selected][2]
   char2.x = char1.x + 90
+  char2.y = char1.y
   table.insert(vsTeamTable,char2)
 
   local char3 = display.newImageRect(vsTeamGroup,lvl_charTable[lvl_selected][3].imgSX,45,80)
   char3.myName = lvl_charTable[lvl_selected][3]
   char3.x = char2.x + 90
+  char3.y = char1.y
   table.insert(vsTeamTable,char3)
 
 end
@@ -109,9 +111,10 @@ local function letsPlay(event)
     print("event.target.label = "..event.target.nome)
   elseif (phase == "ended") then
     if(lvl_selected == nil) then
-      print("Nessun livello selezionato :(\n")
+      print("Nessun livello selezionato :(")
+      print(lvl_selected)
     else
-      print("Livello selezionato:\n"..lvl_selected.."!!\nsi giocaaaaa!")
+      print("Livello selezionato: "..lvl_selected.."!!\nSi giocaaaaa!")
       composer.setVariable("vsTeamTable",vsTeamTable)
       composer.gotoScene("game",{effect ="fade",time = 400})
     end
@@ -156,7 +159,7 @@ function scene:create( event )
   local scrollView = widget.newScrollView (
     {
       width = display.contentWidth*1.2,
-      height = display.contentHeight-90,
+      height = display.contentHeight-100,
       left = -40,
       backgroundColor = backgroundColor,
       --isBounceEnabled = false,
@@ -268,8 +271,8 @@ function scene:create( event )
           onRelease = letsPlay
       }
   )
-  playButton.x = display.contentWidth-15
-  playButton.y = display.contentHeight-50
+  playButton.x = display.contentWidth-20
+  playButton.y = display.contentHeight-60
   uiGroup:insert(playButton)
 
   -- Pulsante back
@@ -289,7 +292,7 @@ function scene:create( event )
       onRelease = previousPage
     }
   )
-  backButton.x = 15
+  backButton.x = 20
   backButton.y = playButton.y
   uiGroup:insert(backButton)
 
@@ -305,7 +308,8 @@ function scene:show( event )
 
   elseif ( phase == "did" ) then
       -- Code here runs when the scene is entirely on screen
-  end
+      --print("lvl selected = "..lvl_selected.."\n numero di personaggi = ".. #lvl_charTable[lvl_selected])
+    end
 end
 
 -- hide()
