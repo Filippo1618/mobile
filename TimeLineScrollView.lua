@@ -116,7 +116,7 @@ local function letsPlay(event)
     else
       print("Livello selezionato: "..lvl_selected.."!!\nSi giocaaaaa!")
       composer.setVariable("vsTeamTable",vsTeamTable)
-      composer.gotoScene("game",{effect ="fade",time = 400})
+      composer.gotoScene("fight",{effect ="fade",time = 400})
     end
   end
   return true

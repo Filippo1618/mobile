@@ -2,7 +2,7 @@
 
 
 require("spots")
-require ("characters")
+require ("character")
 require ("skillsBar")
 require ("turnTable")
 require("background")
@@ -82,8 +82,8 @@ local enemySpotsCoord = {
 local gameOver = false
 
 local chars = composer.getVariable("characters")
-local lvlChars ={chars[3],chars[4],chars[3]} --mandato come proprieta
-
+--local lvlChars ={chars[3],chars[4],chars[3]} --mandato come proprieta
+local lvlChars =composer.getVariable("vsTeamTable")
 local enemySpotsProperties = {
     isEnemy = true,
     type = {"blt","blm","blb","flt","flm","flb"},

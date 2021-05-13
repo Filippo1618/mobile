@@ -13,8 +13,6 @@ local composer = require ("composer")
 composer.gotoScene( "menu", {effect = "fade", time = 200} )
 
 
-local composer = require("composer")
-
 -----------------------------------------------------------------------------------------
 --
 -- characters.lua
@@ -413,16 +411,14 @@ function AddCharToCollection (char)
  table.insert(CharactersCollection, newChar)
 end
 
-AddCharToCollection(characters[1])
-composer.setVariable("characters", charactersCollection)
+AddCharToCollection(characters[1]) -- Collezione chars disponibili per fight
+composer.setVariable("characters", characters) -- tutti i chars
 
 -----------------------------------------------------------------------------------------
 --
 -- levels.lua
 --
 -----------------------------------------------------------------------------------------
-
-local composer = require("composer")
 
 --local characters = composer.getVariable("characters")
 
