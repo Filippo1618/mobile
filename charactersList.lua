@@ -375,7 +375,7 @@ local characters =
 --composer.setVariable("characters", characters)
 
 
-local CharactersCollection = {}
+local charactersCollection = {}
   --Funzione per copiare tabelle in modo ricorsivo
 local function deepcopy(orig)
   local orig_type = type(orig)
@@ -395,7 +395,7 @@ end
 --copia una tabella char in CharactersCollection
 function AddCharToCollection (char)
  local newChar = deepcopy(char)
- table.insert(CharactersCollection, newChar)
+ table.insert(charactersCollection, newChar)
 end
 
 AddCharToCollection(characters[1])

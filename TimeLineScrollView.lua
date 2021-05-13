@@ -14,7 +14,7 @@ local altezzaLivelli = 100*1.3
 
 local characters = composer.getVariable("characters")
 local lvl_charTable = composer.getVariable("lvl_charTable")
-local lvl_selected = nil
+local lvl_selected = composer.getVariable("start_lvl")
 
 local backGroup
 local mainGroup
@@ -52,16 +52,6 @@ local function scrollListener( event )
 	return true
 end
 
--- funzione per il set del livello e visualizzazione nemici
-local function setLvlEnemies( event )
-  print("settato livello : ",lvl_selected)
-  if ( event.phase == "began" ) then
-    print( "Touch event began on: " .. event.target.id )
-  elseif ( event.phase == "ended" ) then
-    print( "Touch event ended on: " .. event.target.id )
-  end
-  return true
-end
 
 local function createVsGroup(lvl_charsID)
 
