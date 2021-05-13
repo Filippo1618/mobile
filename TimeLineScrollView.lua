@@ -13,8 +13,9 @@ local lunghezzaLivelli = 161*1.3
 local altezzaLivelli = 100*1.3
 
 local characters = composer.getVariable("characters")
-local lvl_charTable = composer.getVariable("lvl_charTable")
-local lvl_selected = nil
+local lvlCharTable = composer.getVariable("lvlCharTable")
+local lvlSelected = nil
+local lvlCharsID
 
 local backGroup
 local mainGroup
@@ -54,7 +55,7 @@ end
 
 -- funzione per il set del livello e visualizzazione nemici
 local function setLvlEnemies( event )
-  print("settato livello : ",lvl_selected)
+  print("settato livello : ",lvlSelected)
   if ( event.phase == "began" ) then
     print( "Touch event began on: " .. event.target.id )
   elseif ( event.phase == "ended" ) then
@@ -63,15 +64,25 @@ local function setLvlEnemies( event )
   return true
 end
 
-local function createVsGroup(lvl_charsID)
+local function createVsGroup(lvlCharsID)
   
-  for i = 1 , #lvl_charsID do
-    local char = display.newImageRect(vsTeamGroup,characters[lvl_charsID[i]].imgSX,45,80)
-    print("i = " .. i .. " ID = ".. lvl_charsID[i])
-    print(characters[lvl_charsID[i]].name)
+  for i = 1 , #lvlCharsID do
+    local char = display.newImageRect(vsTeamGroup,characters[lvlCharsID[i]].imgSX,45,80)
+    print("i = " .. i .. " ID = ".. lvlCharsID[i])
+    print(characters[lvlCharsID[i]].name)
     char.x = 50 +(90*(i-1))
     char.y = 15
     table.insert(vsTeamTable,char)
+  end
+
+end
+local function clearVsTeamTable()
+  local char
+  for i = #vsTeamTable,1,-1 do
+    char = vsTeamTable[i]
+    table.remove(vsTeamTable,i)
+    display.remove(char)
+    char = nil
   end
 
 end
@@ -79,20 +90,14 @@ end
 local function onObjectTap( event )
   --se la vsTeamTable non è vuota allora la pulisco
   if(#vsTeamTable ~= 0) then
-
-    local char
-
-    for i = #vsTeamTable,1,-1 do
-      char = vsTeamTable[i]
-      table.remove(vsTeamTable,i)
-      display.remove(char)
-      char = nil
-    end
+    clearVsTeamTable()
   end
 
-  local lvlName = event.target.lvl
-  composer.setVariable("lvl_selected",lvlName)
-  local lvlCharsID = lvl_charTable[lvlName]
+  lvlSelected = event.target.lvl
+  lvlCharsID = lvlCharTable[lvlSelected]
+  composer.setVariable("lvlSelected",lvlSelected)
+  composer.setVariable("lvlCharsID",lvlCharsID)
+
   createVsGroup(lvlCharsID)
   return true
 end
@@ -105,14 +110,11 @@ local function letsPlay(event)
     print("event.target.id = "..event.target.id)
     print("event.target.label = "..event.target.nome)
   elseif (phase == "ended") then
-    if(lvl_selected == nil) then
+    if(lvlSelected == nil) then
       print("Nessun livello selezionato :(")
-      print(lvl_selected)
+      print(lvlSelected)
     else
-      print("Livello selezionato: "..lvl_selected.."!!\nSi giocaaaaa!")
-      for i=1,#vsTeamTable do
-        print(vsTeamTable[i].name)
-      end
+      print("Livello selezionato: "..lvlSelected.."!!\nSi giocaaaaa!")
       composer.gotoScene("fight",{effect ="fade",time = 400})
     end
   end
@@ -305,7 +307,7 @@ function scene:show( event )
 
   elseif ( phase == "did" ) then
       -- Code here runs when the scene is entirely on screen
-      --print("lvl selected = "..lvl_selected.."\n numero di personaggi = ".. #lvl_charTable[lvl_selected])
+      --print("lvl selected = "..lvlSelected.."\n numero di personaggi = ".. #lvlCharTable[lvlSelected])
     end
 end
 
