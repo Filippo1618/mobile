@@ -52,7 +52,7 @@ local function scrollListener( event )
 	return true
 end
 
-
+-- visualizzazione vsTeamTable
 local function createVsGroup(lvl_charsID)
 
   for i = 1 , #lvl_charsID do
@@ -66,7 +66,7 @@ local function createVsGroup(lvl_charsID)
 
 end
 
-
+-- selezione del livello e pulizia vsTeamTable
 local function onObjectTap( event )
   --se la vsTeamTable non è vuota allora la pulisco
   if(#vsTeamTable ~= 0) then

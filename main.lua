@@ -9,7 +9,6 @@ display.setStatusBar( display.HiddenStatusBar )
 
 local composer = require ("composer")
 
-
 --GLOBAL
 DisplayWidth = display.contentWidth
 DisplayHeight = display.contentHeight
@@ -413,7 +412,7 @@ composer.setVariable("characters", characters) -- tutti i chars
 
 -----------------------------------------------------------------------------------------
 --
--- levels.lua
+-- lvlCharTable.lua
 --
 -----------------------------------------------------------------------------------------
 
