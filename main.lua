@@ -384,7 +384,9 @@ local characters =
     },
 }
 
-local CharactersCollection = {}
+
+local charactersCollection = {}
+
   --Funzione per copiare tabelle in modo ricorsivo
 local function deepcopy(orig)
   local orig_type = type(orig)
@@ -401,14 +403,14 @@ local function deepcopy(orig)
   return copy
 end
 
---copia una tabella char in CharactersCollection
+--copia una tabella char in charactersCollection
 function AddCharToCollection (char)
- local newChar = deepcopy(char)
- table.insert(CharactersCollection, newChar)
+  table.insert(charactersCollection,char)
 end
 
 AddCharToCollection(characters[1]) -- Collezione chars disponibili per fight
 composer.setVariable("characters", characters) -- tutti i chars
+composer.setVariable("charactersCollection", charactersCollection) -- tutti i chars
 
 -----------------------------------------------------------------------------------------
 --
@@ -416,14 +418,17 @@ composer.setVariable("characters", characters) -- tutti i chars
 --
 -----------------------------------------------------------------------------------------
 
-local lvl_charTable = {}
-lvl_charTable["medioevo"] = { 2,2,3 }
-lvl_charTable["rinascimento"] = { 3,3,4 }
-lvl_charTable["risorgimento"] = { 4,4,5 }
-lvl_charTable["1900"] = { 5,4,5 }
-lvl_charTable["eta_moderna"] = { 5,5,5 }
+local lvlCharTable = {}
+lvlCharTable["medioevo"] = { 2,2,3 }
+lvlCharTable["rinascimento"] = { 3,3,4 }
+lvlCharTable["risorgimento"] = { 4,4,5 }
+lvlCharTable["1900"] = { 4,5,5 }
+lvlCharTable["eta_moderna"] = { 5,5,5 }
 
-composer.setVariable("lvl_charTable", lvl_charTable)
+composer.setVariable("lvlCharTable", lvlCharTable)
 
 -- Start at menu
 composer.gotoScene( "menu", {effect = "fade", time = 200} )
+
+
+

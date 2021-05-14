@@ -24,8 +24,12 @@ local turnTable = {}
 local spotsTable = {} --?
 local charsTable = {} --?
 local playerOnTurn = {}
-local battlePhase = "starting..."
-
+local charactersCollection = composer.getVariable("charactersCollection")
+for index, value in ipairs(charactersCollection) do
+    print("[charactersCollection:]\n")
+    print("i = "..index.. " name: " .. value.name)
+  end
+  
 local allySpotsCoord = {
     blt = {
         x = 40 ,
@@ -83,7 +87,14 @@ local gameOver = false
 
 local chars = composer.getVariable("characters")
 --local lvlChars ={chars[3],chars[4],chars[3]} --mandato come proprieta
-local lvlChars = composer.getVariable("vsTeamTable")
+local lvlCharsTable = composer.getVariable("lvl_charTable")
+local lvlSelected = composer.getVariable("lvlSelected")
+local lvlCharsID =  composer.getVariable("lvlCharsID")
+
+local lvlChars = {}
+for i = 1, #lvlCharsID do
+    table.insert(lvlChars,chars[lvlCharsID[i]])
+end
 local enemySpotsProperties = {
     isEnemy = true,
     type = {"blt","blm","blb","flt","flm","flb"},
@@ -325,7 +336,7 @@ function scene:create( event )
     allySpotsGroup:addSpotListener()
     --creo i chars di ogni squadra e li metto nei rispettivi group object
     enemyTeamGroup = makeEnemyTeam(lvlChars)
-    allyTeamGroup = makeAllyTeam(CharactersCollection)
+    allyTeamGroup = makeAllyTeam(charactersCollection)
     --inizio a creare i turni
     turnTable = NewTurnTable(uiGroup)
     charsTable = initCharsTable(enemyTeamGroup,allyTeamGroup)
