@@ -1,6 +1,6 @@
 -----------------------------------------------------------------------------------------
 --
--- characters.lua
+-- charactersList.lua
 --
 -----------------------------------------------------------------------------------------
 
@@ -371,12 +371,9 @@ local characters =
     },
 }
 
--- set the variable characters
---composer.setVariable("characters", characters)
+local charactersCollection = {}
 
-
-local CharactersCollection = {}
-  --Funzione per copiare tabelle in modo ricorsivo
+--Funzione per copiare tabelle in modo ricorsivo
 local function deepcopy(orig)
   local orig_type = type(orig)
   local copy
@@ -395,7 +392,7 @@ end
 --copia una tabella char in CharactersCollection
 function AddCharToCollection (char)
  local newChar = deepcopy(char)
- table.insert(CharactersCollection, newChar)
+ table.insert(charactersCollection, newChar)
 end
 
 AddCharToCollection(characters[1])

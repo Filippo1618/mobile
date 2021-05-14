@@ -1,13 +1,21 @@
+-----------------------------------------------------------------------------------------
+--
+-- skillsBar.lua
+--
+-----------------------------------------------------------------------------------------
+
 require("skill")
-local widget = require "widget"
+local widget = require("widget")
 
 function NewSkillsBar()
+
     local self = display.newGroup()
-    local skillsRect = display.newRoundedRect(display.contentCenterX,290,display.contentWidth * 1.1,50, 10)
-    self:insert(skillsRect)
+
+    local skillsRect = display.newRoundedRect(display.contentCenterX, 290, display.contentWidth*1.1, 50, 10)
     skillsRect:setFillColor(grey)
     skillsRect.alpha = 0.3
     skillsRect.y = 290
+    self:insert(skillsRect)
 
     local playerOnTurn --= player
     local passive = {}
@@ -60,6 +68,7 @@ function NewSkillsBar()
             passive[i].strokeWidth = 0
         end
     end
+    
     function self:getPassiveSkillOn(x,y)
         for i = 1, #passive do
             if (x >= passive[i].contentBounds.xMin) 

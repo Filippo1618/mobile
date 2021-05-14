@@ -64,6 +64,7 @@ local function setLvlEnemies( event )
   return true
 end
 
+-- crea la visualizzazione di vsTeamTable
 local function createVsGroup(lvlCharsID)
   
   for i = 1 , #lvlCharsID do
@@ -74,8 +75,9 @@ local function createVsGroup(lvlCharsID)
     char.y = 15
     table.insert(vsTeamTable,char)
   end
-
 end
+
+-- pulisce vsTeamTable per la nuova visualizzazione
 local function clearVsTeamTable()
   local char
   for i = #vsTeamTable,1,-1 do
@@ -87,6 +89,7 @@ local function clearVsTeamTable()
 
 end
 
+-- tap sulla selezione livello
 local function onObjectTap( event )
   --se la vsTeamTable non è vuota allora la pulisco
   if(#vsTeamTable ~= 0) then
