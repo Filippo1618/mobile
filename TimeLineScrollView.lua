@@ -225,20 +225,19 @@ function scene:create( event )
   buttonRisorgimento:addEventListener( "tap", onObjectTap )
 
   local button1900 = widget.newButton(
-  {
-    width = lunghezzaLivelli,
-    height = altezzaLivelli,
-    label = "Età Moderna 1900 D.C.",
-    myName = "eta_moderna",
-    textAllign ="center",
-    labelColor = { default={ 255,140,0 }, over={ 75,0,130 } },
-    labelYOffset = altezzaLivelli/2 + 20,
-    top = 20,
-    left = 20,
-    defaultFile ="img/sfondo_1900.png",
-  }
+   {
+     width = lunghezzaLivelli,
+     height = altezzaLivelli,
+     label = "Età Moderna 1900 D.C.",
+     textAllign ="center",
+     labelColor = { default={ 255,140,0 }, over={ 75,0,130 } },
+     labelYOffset = altezzaLivelli/2 + 20,
+     top = 20,
+     left = 20,
+     defaultFile ="img/sfondo_1900.png",
+   }
   )
-  button1900.lvl = "1900"
+  button1900.lvl = "eta_moderna"
   button1900:addEventListener( "tap", onObjectTap )
 
 
