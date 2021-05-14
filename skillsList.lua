@@ -4,7 +4,7 @@
 --
 -----------------------------------------------------------------------------------------
 
-local skills = {
+local skillsList = {
 
     ["passiva"] = {
         --1
@@ -26,7 +26,7 @@ local skills = {
             value = 10,
         },
     },
-    ["attacco"] =
+    ["attacco"] = {
         --1
         {
             name = "spadata",
@@ -39,7 +39,8 @@ local skills = {
             description = "attacco magico di fuoco",
             value = 30,
         },
-    ["difesa"] =
+    },
+    ["difesa"] = {
         --1
         {
             name = "armaturaSingolo",
@@ -76,7 +77,8 @@ local skills = {
             description = "aumenta la velocita del team",
             value = 5,
         },
-        ["speciale"] =
+    },
+    ["speciale"] = {
         --1
         {
             name = "attaccoFrontline",
@@ -119,4 +121,5 @@ local skills = {
             description = "attacca la terza riga",
             value = 10,
         },
+    },
 }
