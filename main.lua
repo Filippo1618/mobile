@@ -43,7 +43,8 @@ local characters =
         hpRegen = 5
     },
     skills =
-    { passive =
+    { 
+      passive =
       { --1
         {
             imgPath = "img/sword.jpg",

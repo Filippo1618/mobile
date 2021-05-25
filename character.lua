@@ -121,11 +121,25 @@ function NewFightCharacter ( properties, isEnemy )
     self.turnText = {}
     self.heAttacked = false
     self.nextToAttack = false
+    self.passiveSkill = {}
+    self.activeSkill = {}
 
     
     function self:changeSpotColor(color)
         self.spot:setFillColor(color)
     end
+
+    function self:makeActiveSkills()
+        local skills = self.infoChar.skills.active
+        print("[character.makeSkills] chiamo newSkill ".. #skills .. " volte" )
+        for i=1 , #skills do
+            local skill = NewSkill(skills[i])
+            print("[character.makeSkills]"..skill.name)
+            print("[character.makeSkills]"..skill.desc)
+            self.activeSkill[i] = skill
+        end
+    end
+
     
     function self:makeTurnDisplay()
         
@@ -170,7 +184,6 @@ function NewFightCharacter ( properties, isEnemy )
         end
     end
 
-    -- self.skills = properties.skill
     function self:setOnSpot(spot)
         self.spot = spot
         self.x = spot.x

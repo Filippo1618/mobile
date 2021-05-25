@@ -24,7 +24,7 @@ local uiGroup
 local function startRelease( event )
     if ( "ended" == event.phase ) then
         print( "scegli il livello" )
-        composer.gotoScene("timelineScrollView", {effect ="fade", time= 200})
+        composer.gotoScene("timeLineScrollView", {effect ="fade", time= 200})
     end
 end
 

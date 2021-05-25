@@ -18,18 +18,19 @@ function NewSkillsBar()
     end
 
     local function activeSkillListener(event)
-        local skill = event.target
+        local skillRect = event.target
+        local skill = skillRect.skill
         if ( event.phase == "began" ) then
-            display.getCurrentStage():setFocus( skill )
-            print( "SkillTouch event began on: " .. skill.stat.name )
+            display.getCurrentStage():setFocus( skillRect )
+            print("[skillBar.activeSkillListener] SkillTouch event began on: " ..skill.name )
         elseif ( event.phase == "ended" ) then
             local char = GetCharOn(event.x,event.y)
             if(char == nil ) then 
-                print("non hai lanciato la skill su un besaglio valido!")
+                print("[skillBar.activeSkillListener] non hai lanciato la skill su un besaglio valido!")
             else
-                print( "SkillTouch event ended on character: " .. char.infoChar.name )
-                print( "Skill: " .. skill.stat.name .. "\nCasted on: ".. char.infoChar.name)
-
+                print("[skillBar.activeSkillListener] SkillTouch event ended on character: " .. char.infoChar.name )
+                print("[skillBar.activeSkillListener] Skill: " .. skill.name)
+                print("[skillBar.activeSkillListener] Casted on: ".. char.infoChar.name)
                 display.getCurrentStage():setFocus( nil )
             end
         elseif ( event.phase == "cancelled" ) then
@@ -111,15 +112,13 @@ function NewSkillsBar()
             passive[i]:addEventListener("touch", passiveSkillListener)
         end
         self:setPassive(playerOnTurn.passiveSkillActive)
-        --passive[player.passiveSkillActive].strokeWidth = 2
-        --passive[player.passiveSkillActive]:setStrokeColor(0,0,1)
         
         for i=1, #activeSkills do
             active[i] = display.newRoundedRect(0,0,40,40,10)
             active[i].id = i
             active[i].x = startingActiveX + ((i-1)*50)
             active[i].y = y
-            active[i].stat = activeSkills[i]
+            active[i].skill = player.activeSkill[i]
             self:insert(active[i])
         end
         self:setActiveListener()
@@ -135,9 +134,11 @@ function NewSkillsBar()
     function self:clearSkills ()
         for i = 1, #passive do
             passive[i]:removeSelf()
+            passive[i] = nil
         end
         for i = 1 , #active do
             active[i]:removeSelf()
+            active[i] = nil
         end
     end
     return self

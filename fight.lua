@@ -6,6 +6,7 @@ require ("character")
 require ("skillsBar")
 require ("turnTable")
 require("background")
+require ("skill")
 
 local widget = require "widget"
 local composer = require( "composer" )
@@ -25,11 +26,7 @@ local spotsTable = {} --?
 local charsTable = {} --?
 local playerOnTurn = {}
 local charactersCollection = composer.getVariable("charactersCollection")
-for index, value in ipairs(charactersCollection) do
-    print("[charactersCollection:]\n")
-    print("i = "..index.. " name: " .. value.name)
-  end
-  
+
 local allySpotsCoord = {
     blt = {
         x = 40 ,
@@ -258,6 +255,7 @@ local function makeAllyTeam(selectedTeam)
         tempAvatar:setOnSpot(allySpotsGroup[rndSpots[i]])
         tempAvatar:initHPBar()
         tempAvatar:initManaBar()
+        tempAvatar:makeActiveSkills()
         tempGroup:insert(tempAvatar)
     end
     tempGroup.totalObj = num
@@ -291,7 +289,7 @@ local function getPlayerOnTurn()
     return player
 end
 
-local function gameLoop()
+local function gameLoop(isOver)
     --?? da fare in una funzione 
     turnTable.roundCount = 1
 
