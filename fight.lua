@@ -23,13 +23,17 @@ local listenerTable = {} --necessaria?
 local turnTable = {}
 local spotsTable = {} --?
 local charsTable = {} --?
-local playerOnTurn = {}
+
 local charactersCollection = composer.getVariable("charactersCollection")
-for index, value in ipairs(charactersCollection) do
+local gameOver = false
+
+--per vedere le proprieta dellla mia squadra
+--[[for index, value in ipairs(charactersCollection) do
     print("[charactersCollection:]\n")
     print("i = "..index.. " name: " .. value.name)
   end
-  
+  ]]--
+
 local allySpotsCoord = {
     blt = {
         x = 40 ,
@@ -83,7 +87,6 @@ local enemySpotsCoord = {
     },
 }
 
-local gameOver = false
 
 local chars = composer.getVariable("characters")
 --local lvlChars ={chars[3],chars[4],chars[3]} --mandato come proprieta
@@ -92,9 +95,11 @@ local lvlSelected = composer.getVariable("lvlSelected")
 local lvlCharsID =  composer.getVariable("lvlCharsID")
 
 local lvlChars = {}
+
 for i = 1, #lvlCharsID do
     table.insert(lvlChars,chars[lvlCharsID[i]])
 end
+
 local enemySpotsProperties = {
     isEnemy = true,
     type = {"blt","blm","blb","flt","flm","flb"},
@@ -104,7 +109,7 @@ local enemySpotsProperties = {
 local allySpotsProperties = {
     isEnemy = false,
     type = {"blt","blm","blb","flt","flm","flb"},
-    -- ecc ecc
+    -- buff/debuff
 }
 
 -----------------------------------------------------------------------------------------
@@ -223,6 +228,7 @@ local function addDragListener(teamGroup)
         teamGroup[i]:addEventListener( "touch",dragListener)
     end
 end
+
 local function removeDragListener(teamGroup)
     for i=1 , teamGroup.numChildren do
         teamGroup[i]:removeEventListener( "touch",dragListener)

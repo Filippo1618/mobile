@@ -1,12 +1,13 @@
 ---@diagnostic disable: undefined-global
 
 require("spots")
+
 local widget = require "widget"
 
 local function onCharInfo (event)
     local tempChar = event.target
-    print("Char Listener: ")
     if ( event.phase == "began" ) then
+        print("Char Listener: ")
         display.getCurrentStage():setFocus( tempChar )
         print( "Touch event began on: " .. tempChar.infoChar.name )
         print("myTurn: ".. tempChar.myTurn)
@@ -15,8 +16,6 @@ local function onCharInfo (event)
         for k,v in pairs(tempChar.infoChar.baseStat) do
             print(k .." = " .. v )
         end
-    elseif event.phase == "moved" then
-        print("moved ")
     elseif event.phase == "ended" or event.phase == "cancelled" then
         print( "Touch event ended on: " .. tempChar.infoChar.name )
         display.getCurrentStage():setFocus( nil )
@@ -121,6 +120,8 @@ function NewFightCharacter ( properties, isEnemy )
     self.turnText = {}
     self.heAttacked = false
     self.nextToAttack = false
+    self.buff = {}
+    self.deBuff = {}
 
     
     function self:changeSpotColor(color)

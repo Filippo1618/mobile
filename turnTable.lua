@@ -21,12 +21,6 @@ function NewTurnTable(uiGroup)
     self.attacked = {}
     self.deadChars = {}
     
-    function self:newQueue(charToQueue)
-        for i = 1, #charToQueue do
-            table.insert(self.queued,charToQueue[i])
-        end
-        self:sortQueueByVel()
-    end
 
     function self:getFirstQueued()
         return table.remove(self.queued,1)
@@ -54,6 +48,14 @@ function NewTurnTable(uiGroup)
         end
     end
 
+    function self:newQueue(charToQueue)
+        for i = 1, #charToQueue do
+            table.insert(self.queued,charToQueue[i])
+        end
+        self:sortQueueByVel()
+    end
+
+
     function self:updateRoundTurnText()
         self.roundText.text ="Round: ".. self.roundString()
         self.turnText.text = "Turn: "..self.turnString()
@@ -63,6 +65,7 @@ function NewTurnTable(uiGroup)
         self.roundCount = self.roundCount + 1
         self:updateRoundTurnText()
     end
+    
     function self:increaseTurn()
         self.turnCount = self.turnCount + 1
         self:updateRoundTurnText()
