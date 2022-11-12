@@ -21,7 +21,7 @@ DisplayHeight = display.contentHeight
 
 local characters =
 {
-    --1 (player)
+    --1 (player) -----------------------------
     { --properties/infoChar
     img = "img/characters/illustratorDX.png",
     imgSX = "img/characters/illustratorSX.png",
@@ -75,10 +75,13 @@ local characters =
           name = "A1",
           type = "dmg",
           desc = "attacco a target singolo; puo attaccare un Character solo sulla la prima fila",
-          target = {"frontLine"},
+          target = {"flt", "flm", "flb"},
           manaCost = 10,
           --calcolaDanni = calcolaDannoStandard(playerCaster,skill,playerTarget)
           --onCast = function(skill,spot,playerTarget) dealDmgPlayer(playerTarget,skill) end
+          onCast = function (self, target) 
+            print(self, target)
+          end ,
         },
         --2
         {
@@ -88,12 +91,12 @@ local characters =
           dmg = 50,
           manaCost = 70,
           desc = "attacco a target singolo, puo attaccare un Characters solo sulla la seconda fila",
-          target = {1,"backLine"},
+          target = {"blt", "blm", "blb"},
         },
         }
       }
     },
-    --2
+    --2 --------------------------------------
     {
     img = "img/characters/father_Time_DX.png",
     imgSX = "img/characters/father_Time_SX.png",
@@ -148,10 +151,14 @@ local characters =
           team = "vs",
           dmg = 50,
           desc = "attacco a target singolo; puo attaccare un Character solo sulla la prima fila",
-          target = {"frontLine"},
+          target = {"flt", "flm", "flb"},
           manaCost = 10,
           --calcolaDanni = calcolaDannoStandard(playerCaster,skill,playerTarget)
-          onCast = function(skill,spot,playerTarget) dealDmgPlayer(playerTarget,skill) end
+          --onCast = function(skill,spot,playerTarget) dealDmgPlayer(playerTarget,skill) end
+          onCast = function (self, target) 
+            print(self, target)
+          end ,
+
         },
         --2
         {
@@ -161,13 +168,13 @@ local characters =
           dmg = 50,
           manaCost = 70,
           desc = "attacco a target singolo; puo attaccare un Character solo sulla la seconda fila",
-          target = {"backLine"},
+          target = {"blt", "blm", "blb"},
           onCast = function(skill,spot,playerTarget) dealDmgPlayer(playerTarget,skill) end
         },
         }
       },
     },
-    --3
+    --3 -----------------------------------------
     {
         img = "img/characters/philosopher_DX.png",
         imgSX = "img/characters/philosopher_SX.png",
@@ -240,7 +247,7 @@ local characters =
             }
           }
     },
-    --4
+    -- 4 -------------------------------------------
     {
         img = "img/characters/socrates_DX.png",
         imgSX = "img/characters/socrates_SX.png",
@@ -311,7 +318,7 @@ local characters =
             }
           }
     },
-    --5
+    -- 5 -------------------------------------
     {
         img = "img/characters/zeus_DX.png",
         imgSX = "img/characters/zeus_SX.png",
@@ -410,7 +417,7 @@ end
 
 AddCharToCollection(characters[1]) -- Collezione chars disponibili per fight
 composer.setVariable("characters", characters) -- tutti i chars
-composer.setVariable("charactersCollection", charactersCollection) -- tutti i chars
+composer.setVariable("charactersCollection", charactersCollection) -- tutti i chars disponibili
 
 -----------------------------------------------------------------------------------------
 --
@@ -419,7 +426,7 @@ composer.setVariable("charactersCollection", charactersCollection) -- tutti i ch
 -----------------------------------------------------------------------------------------
 
 local lvlCharTable = {}
-lvlCharTable["medioevo"] = { 2,2,3 }
+lvlCharTable["medioevo"] = { 2,3 }
 lvlCharTable["rinascimento"] = { 3,3,4 }
 lvlCharTable["risorgimento"] = { 4,4,5 }
 lvlCharTable["1900"] = { 4,5,5 }

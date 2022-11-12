@@ -168,6 +168,35 @@ function GetCharOn(x,y) --DA SPOSTARE IN character.LUA ??
     return nil
 end
 
+function activeSkillListener (event)
+    local skill = event.target
+    if ( event.phase == "began" ) then
+        display.getCurrentStage():setFocus( skill )
+        print( "SkillTouch event began on: " .. skill.stat.name )
+        print( "Skill desc: " .. skill.stat.desc )
+        for i = 1 , #skill.stat.target do 
+            print(skill.stat.target[i])
+        end
+
+    elseif ( event.phase == "ended" ) then
+        local char = GetCharOn(event.x,event.y)
+        --inserire qui come gestire gli spot se servono
+        if(char == nil ) then 
+            print("non hai lanciato la skill su un besaglio valido!")
+            display.getCurrentStage():setFocus( nil )
+        else
+            print( "SkillTouch event ended on character: " .. char.infoChar.name )
+            print( "Skill: " .. skill.stat.name .. "\nCasted on: ".. char.infoChar.name)
+            skill.stat.onCast(playerOnTurn.infoChar.name, char.infoChar.name)
+            display.getCurrentStage():setFocus( nil )
+        end
+    elseif ( event.phase == "cancelled" ) then
+        display.getCurrentStage():setFocus( nil )
+    end
+    return true
+end
+
+
 local function dragListener( event )
     local charTouched = event.target
     local initialSpot = charTouched.spot
@@ -302,6 +331,7 @@ local function gameLoop()
     playerOnTurn = turnTable:getPlayerOnTurn()
     skillsBarGroup:setPlayerOnTurn(playerOnTurn)
     skillsBarGroup:setSkills(playerOnTurn)
+
 
 end
 

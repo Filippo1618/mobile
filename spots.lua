@@ -19,6 +19,14 @@ local function onTouchInfo (event)
     return true
 end
 
+function colorSpots(spots)
+
+    for i=1, #spots do
+        spots[i]:cetFillColor(1,0,0,0.5)
+    end
+    
+end
+
 function NewGridSpots(properties,spotsCoord)
 
     local self = display.newGroup()

@@ -4,9 +4,8 @@
 --
 -----------------------------------------------------------------------------------------
 
-require("skill")
-local widget = require("widget")
-
+--require("skill")
+--local widget = require("widget")
 function NewSkillsBar()
 
     local self = display.newGroup()
@@ -25,19 +24,31 @@ function NewSkillsBar()
         playerOnTurn = char
     end
 
-    local function activeSkillListener(event)
+    local function coloraSpotTarget()
+    
+    end
+
+    --[[local function activeSkillListener(event)
         local skill = event.target
         if ( event.phase == "began" ) then
             display.getCurrentStage():setFocus( skill )
             print( "SkillTouch event began on: " .. skill.stat.name )
+            print( "Skill desc: " .. skill.stat.desc )
+            for i = 1 , #skill.stat.target do 
+                print(skill.stat.target[i])
+
+            end
+
         elseif ( event.phase == "ended" ) then
             local char = GetCharOn(event.x,event.y)
+            --inserire qui come gestire gli spot se servono
             if(char == nil ) then 
                 print("non hai lanciato la skill su un besaglio valido!")
+                display.getCurrentStage():setFocus( nil )
             else
                 print( "SkillTouch event ended on character: " .. char.infoChar.name )
                 print( "Skill: " .. skill.stat.name .. "\nCasted on: ".. char.infoChar.name)
-
+                skill.stat.onCast(playerOnTurn.infoChar.name, char.infoChar.name)
                 display.getCurrentStage():setFocus( nil )
             end
         elseif ( event.phase == "cancelled" ) then
@@ -45,7 +56,8 @@ function NewSkillsBar()
         end
         return true
     end
-    
+    ]]
+
     local function passiveSkillListener( event )
         local skill = event.target
         if ( event.phase == "began" ) then
@@ -69,6 +81,11 @@ function NewSkillsBar()
         end
     end
     
+    function self:getActive()
+        return self.active
+    end
+
+
     function self:getPassiveSkillOn(x,y)
         for i = 1, #passive do
             if (x >= passive[i].contentBounds.xMin) 
@@ -129,9 +146,10 @@ function NewSkillsBar()
             active[i].x = startingActiveX + ((i-1)*50)
             active[i].y = y
             active[i].stat = activeSkills[i]
+            --active[i]:addEventListener("touch",activeSkillListener)
+
             self:insert(active[i])
         end
-        self:setActiveListener()
     end
 
     function self:setActiveListener()
@@ -143,9 +161,11 @@ function NewSkillsBar()
     
     function self:clearSkills ()
         for i = 1, #passive do
+            passive[i]:removeEventListener("touch",passiveSkillListener)
             passive[i]:removeSelf()
         end
         for i = 1 , #active do
+            active[i]:removeEventListener("touch",activeSkillListener)
             active[i]:removeSelf()
         end
     end
